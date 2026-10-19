@@ -1,15 +1,40 @@
 import { SiteHeader } from '@/components/site-header';
 import { WaitlistForm } from "@/components/waitlist-form";
 import { pageMetadata } from "@/lib/metadata";
-export const metadata = pageMetadata("Counter — Programmatic buying, built around your outcomes", "Counter is an open platform for advertisers, agencies and publishers to run programmatic media with more control over how it is bought, valued and sold.", "/");
+export const metadata = pageMetadata("Counter — Programmatic buying built around your outcomes", "Counter brings advertisers, agencies and publishers together to buy and sell media using custom buying strategies.", "/");
+// Illustrative only: each audience's tile from the hero diagram, on its own slab.
+const TONES = { advertiser: ['#d9e6fb', '#a9c0ea'], agency: ['#e3dcfb', '#bcaeef'], publisher: ['#f6dfb3', '#dcb871'] } as const;
+function Tile({ x, y, kind }: { x: number; y: number; kind: keyof typeof TONES }) {
+  const [top, side] = TONES[kind];
+  return (<g transform={`translate(${x} ${y})`}>
+    <path d="M-22 0v11l22 11 22 -11V0" fill={side} /><path d="M0 -11 22 0 0 11 -22 0Z" fill={top} stroke="#1e1b19" strokeWidth=".8" />
+  </g>);
+}
+function Slab({ y, opacity = 1 }: { y: number; opacity?: number }) {
+  return (<g transform={`translate(0 ${y})`} opacity={opacity}>
+    <path d="M20 80v10l100 46 100 -46V80" fill="#e9f0fc" stroke="#3b6fd8" />
+    <path d="M120 34 220 80l-100 46L20 80Z" fill="#fbfaf8" stroke="#3b6fd8" strokeWidth="1.1" />
+  </g>);
+}
+function AudienceArt({ kind }: { kind: keyof typeof TONES }) {
+  return (<div className="art-panel aud-art" aria-hidden="true"><div className="art-inner">
+    <svg viewBox="0 0 240 170">
+      {kind === 'publisher' && <><Slab y={24} opacity={.55} /><Slab y={12} opacity={.8} /></>}
+      <Slab y={0} />
+      {kind === 'advertiser' && <Tile x={120} y={76} kind="advertiser" />}
+      {kind === 'agency' && <><Tile x={84} y={76} kind="agency" /><Tile x={120} y={60} kind="agency" /><Tile x={156} y={76} kind="agency" /><Tile x={120} y={92} kind="agency" /></>}
+      {kind === 'publisher' && <><Tile x={84} y={76} kind="publisher" /><Tile x={156} y={76} kind="publisher" /><path d="M120 76V24" stroke="#b8862a" strokeWidth="1.3" fill="none" className="flow" /><circle cx={120} cy={76} r={3} fill="#1e1b19" /></>}
+    </svg>
+  </div></div>);
+}
 export default function Page() { return (<><SiteHeader />
   <main id="top">
     <section className="frame hero">
       <div className="hero-copy">
         <div className="hero-text">
-          <h1>Programmatic buying, built around your outcomes.</h1>
-          <p>Counter is an open platform for <strong>advertisers, agencies and publishers</strong> to run programmatic media with more control over how it is bought, valued and sold.</p>
-          <p>Use your own data, models and agents — or start with ours.</p>
+          <h1>Programmatic buying built around your outcomes</h1>
+          <p>Counter brings <strong>advertisers, agencies and publishers</strong> together to buy and sell media using custom buying strategies.</p>
+          <p>Use sales data, brand requirements and publisher signals to decide which impressions to buy and what to pay.</p>
         </div>
         <div className="hero-cta">
           <a className="btn btn-solid" href="#waitlist">Join the waitlist</a>
@@ -87,148 +112,58 @@ export default function Page() { return (<><SiteHeader />
       </div>
     </section>
     <div className="rule" />
-    <section className="frame" id="problems">
-      <div className="section-head">
-        <span className="side-index">( 01 / 10 )</span>
-        <span className="chip"><i />Problems</span>
-        <h2>Start with a <span className="hl hl-blue">problem worth solving.</span></h2>
-        <p className="lede">You don’t need to replace your entire media stack to start using Counter.</p>
-      </div>
-    </section>
-    <div className="rule" />
-    <section className="frame pillars audiences" aria-label="Problems Counter solves">
-      <article className="pillar">
-        <div className="num">[01]</div>
-        <div className="icon"><svg width={16} height={16} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M1.5 12.5 6 8l3 3 5.5-5.5M10.5 5.5h4v4" /></svg></div>
-        <h3>Improve conversion</h3>
-        <p>Train buying decisions on the outcomes that matter to you rather than relying only on a generic platform algorithm.</p>
-      </article>
-      <article className="pillar">
-        <div className="num">[02]</div>
-        <div className="icon"><svg width={16} height={16} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M8 1.5 13.5 3.5V8c0 3-2.5 5.4-5.5 6.5C5 13.4 2.5 11 2.5 8V3.5L8 1.5Z" /><path d="m5.5 8 1.8 1.8L10.5 6.5" /></svg></div>
-        <h3>Improve brand suitability</h3>
-        <p>Decide whether an impression is right for a specific brand before you bid.</p>
-        <p>Build rules and models around the brand rather than accepting the same classifications as everyone else.</p>
-      </article>
-      <article className="pillar">
-        <div className="num">[03]</div>
-        <div className="icon"><svg width={16} height={16} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3"><rect x={2} y={2} width={5} height={5} rx={1} /><rect x={9} y={2} width={5} height={5} rx={1} /><rect x={2} y={9} width={5} height={5} rx={1} /><path d="M9.5 11.5 11 13l3-3.5" /></svg></div>
-        <h3>Improve inventory quality</h3>
-        <p>Decide what good inventory means to you.</p>
-        <p>Use attention, context, placement, publisher signals and your own performance data to value each opportunity differently.</p>
-      </article>
-    </section>
-    <div className="rule" />
-    <section className="frame" id="intelligence">
-      <div className="section-head">
-        <span className="side-index">( 02 / 10 )</span>
-        <span className="chip"><i style={{background: 'var(--hl-violet)'}} />Intelligence</span>
-        <h2>Models decide. <span className="hl hl-violet">Agents manage.</span></h2>
-        <p className="lede">Media buying happens at two different speeds.</p>
-      </div>
-    </section>
-    <div className="rule" />
-    <section className="frame pillars audiences two" aria-label="Models and agents">
-      <article className="pillar">
-        <div className="num">[01]</div>
-        <div className="icon"><svg width={16} height={16} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M9 1.5 3.5 9H8l-1 5.5L12.5 7H8l1-5.5Z" /></svg></div>
-        <h3>Models make the instant decisions.</h3>
-        <p>Models run directly in the bidstream and decide:</p>
-        <ul className="q-list decide">
-          <li><span>01</span>Should we buy this impression?</li>
-          <li><span>02</span>What is it worth?</li>
-          <li><span>03</span>How much should we bid?</li>
-        </ul>
-        <p>Start with an open model, fine-tune it on your data or bring your own.</p>
-      </article>
-      <article className="pillar">
-        <div className="num">[02]</div>
-        <div className="icon"><svg width={16} height={16} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3"><rect x="2.5" y={4} width={11} height={9} rx={2} /><path d="M8 1.5V4M6 8.5h.01M10 8.5h.01" /></svg></div>
-        <h3>Agents manage everything around them.</h3>
-        <p>An always-on agent monitors the campaign over hours, days and weeks.</p>
-        <p>It can investigate performance, adjust budgets, run experiments, retrain models and ask for approval when needed.</p>
-        <p>Use Counter’s agent or bring your own.</p>
-        <p>Manage it from Counter, Claude, ChatGPT or another agent you already use.</p>
-      </article>
-    </section>
-    <div className="rule" />
-    <section className="frame block" id="advertisers">
+    <section className="frame block aud tone-blue" id="advertisers">
       <div className="block-head">
-        <span className="side-index">( 03 / 10 )</span>
+        <span className="side-index">( 01 / 06 )</span>
         <span className="chip"><i />For advertisers</span>
-        <h2>Optimise around <span className="hl hl-blue">your business.</span></h2>
+        <AudienceArt kind="advertiser" />
       </div>
-      <div className="block-body prose">
-        <p className="lead">Your media buying should reflect your outcomes, data and definition of value.</p>
-        <p>Counter lets advertisers use their own signals and models to influence what gets bought and what gets ignored.</p>
-        <ul className="check-list one">
-          <li>Use first-party outcomes.</li>
-          <li>Build brand-specific suitability.</li>
-          <li>Optimise for conversion, attention, store visits or something unique to your business.</li>
-        </ul>
-        <p>And understand why your budget was spent the way it was.</p>
-        <p className="tagline">Your outcomes drive the decision.</p>
+      <div className="block-body">
+        <h2>Buy for the outcomes that <span className="hl hl-blue">matter to your business</span></h2>
+        <p>Use sales, qualified leads or store visits to shape buying decisions. Set suitability rules around your brand and see how your data influences where your budget goes.</p>
       </div>
     </section>
     <div className="rule" />
-    <section className="frame block" id="agencies">
+    <section className="frame block aud tone-violet" id="agencies">
       <div className="block-head">
-        <span className="side-index">( 04 / 10 )</span>
+        <span className="side-index">( 02 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-violet)'}} />For agencies</span>
-        <h2>Build better <span className="hl hl-violet">buying products.</span></h2>
+        <AudienceArt kind="agency" />
       </div>
-      <div className="block-body prose">
-        <p className="lead">Agencies should be able to differentiate on how media is bought, not just which platform they operate.</p>
-        <ul className="check-list one">
-          <li>Build optimisation around individual clients.</li>
-          <li>Create your own models and strategies.</li>
-          <li>Use them across campaigns and clients.</li>
-          <li>Package them into differentiated media products.</li>
-        </ul>
-        <p>And make the commercial model explicit — whether that’s an optimisation fee, model fee, platform fee or performance-based economics.</p>
-        <p className="tagline">Better results for clients. More differentiated capability for the agency.</p>
+      <div className="block-body">
+        <h2>Turn your expertise into <span className="hl hl-violet">your own buying products</span></h2>
+        <p>Build buying strategies around each client. Use your data and models across campaigns, retain the models you develop, and create a service clients can buy from you.</p>
       </div>
     </section>
     <div className="rule" />
-    <section className="frame block" id="publishers">
+    <section className="frame block aud tone-amber" id="publishers">
       <div className="block-head">
-        <span className="side-index">( 05 / 10 )</span>
+        <span className="side-index">( 03 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-amber)'}} />For publishers</span>
-        <h2>Make your supply easier to <span className="hl hl-amber">understand and value.</span></h2>
+        <AudienceArt kind="publisher" />
       </div>
-      <div className="block-body prose">
-        <p className="lead">Publishers know more about their inventory than anyone else in the supply chain.</p>
-        <p>Counter lets publishers bring that intelligence closer to the buying decision.</p>
-        <ul className="check-list one">
-          <li>Make inventory available through clearer paths to demand.</li>
-          <li>Expose first-party signals without necessarily giving away the underlying data.</li>
-          <li>Build or provide models around quality, context, attention or other characteristics of your supply.</li>
-          <li>Control how your inventory participates.</li>
-        </ul>
-        <p>And reduce unnecessary layers between you and the buyer.</p>
-        <p className="tagline">Your supply. Your signals. Your rules.</p>
+      <div className="block-body">
+        <h2>Help buyers recognise <span className="hl hl-amber">the value of your inventory</span></h2>
+        <p>Bring your audience, context and placement signals into the buying decision. Help advertisers assess what makes your inventory valuable, with rules for how your supply and signals are used.</p>
       </div>
     </section>
     <div className="rule" />
-    <section className="frame" id="simpler">
-      <div className="section-head">
-        <span className="side-index">( 06 / 10 )</span>
-        <span className="chip"><i style={{background: 'var(--hl-green)'}} />Simpler</span>
-        <h2>Built to make the media stack <span className="hl hl-green">simpler.</span></h2>
-        <p className="lede">Traditional programmatic buying moves decisions through multiple platforms, services and network hops.</p>
-        <p className="lede">Counter moves the buying logic closer to the auction.</p>
-        <p className="lede">That means less unnecessary infrastructure and a clearer connection between advertiser outcomes, agency decisioning and publisher supply.</p>
-        <ul className="tag-list efficiency">
-          <li>Less platform.</li>
-          <li>Less unnecessary compute.</li>
-          <li>Clearer economics.</li>
-        </ul>
+    <section className="frame block" id="how">
+      <div className="block-head">
+        <span className="side-index">( 04 / 06 )</span>
+        <span className="chip"><i />How it works</span>
+        <h2>Start with one <span className="hl hl-blue">buying problem</span></h2>
+      </div>
+      <div className="block-body prose">
+        <p className="lead">Choose an outcome, such as a sale, a store visit or an impression that meets your brand requirements. Start with a Counter model or bring your own. Test it on your data, then use it to guide buying decisions.</p>
+        <p>Counter is being built to run these decisions close to the auction and manage the campaign around them.</p>
+        <p><a className="btn" href="/platform/">Explore the platform →</a></p>
       </div>
     </section>
     <div className="rule" />
     <section className="frame" id="open">
       <div className="section-head center">
-        <span className="side-index">( 07 / 10 )</span>
+        <span className="side-index">( 05 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-green)'}} />Open</span>
         <h2>Open <span className="hl hl-violet">by design.</span></h2>
         <p className="lede">The technology underneath Counter should not become another black box.</p>
@@ -250,123 +185,41 @@ export default function Page() { return (<><SiteHeader />
       </div>
     </section>
     <div className="rule" />
-    <section className="frame block" id="artf">
-      <div className="block-head">
-        <span className="side-index">( 08 / 10 )</span>
-        <span className="chip"><i />Standard</span>
-        <h2>Built on <span className="hl hl-blue">ARTF.</span></h2>
-      </div>
-      <div className="block-body prose">
-        <p className="lead">Counter is built on ARTF, the IAB Tech Lab open standard for running software inside the programmatic bidstream.</p>
-        <p>That gives models and bidding logic a standard way to run close to the auction rather than requiring another proprietary integration.</p>
-        <p>Counter builds on the industry standard rather than replacing it.</p>
-        <p><a className="btn" href="/platform/">Learn about the platform →</a></p>
-      </div>
-    </section>
-    <div className="rule" />
-    <section className="frame block" id="supply">
-      <div className="block-head">
-        <span className="side-index">( 09 / 10 )</span>
-        <span className="chip"><i style={{background: 'var(--hl-amber)'}} />Supply</span>
-        <h2>A clearer path between <span className="hl hl-amber">buyers and publishers.</span></h2>
-      </div>
-      <div className="block-body prose">
-        <p className="lead">Counter works with existing supply infrastructure rather than requiring the market to change overnight.</p>
-        <p>Buy through supported SSPs where that makes sense.</p>
-        <p>Connect more directly where it creates value.</p>
-        <p>The goal is:</p>
-        <ul className="tag-list efficiency">
-          <li>fewer unnecessary hops</li>
-          <li>less reselling</li>
-          <li>clearer provenance</li>
-          <li>better use of publisher intelligence</li>
-        </ul>
-        <p>Advertisers and agencies get a clearer view of what they are buying.</p>
-        <p>Publishers get a clearer connection to the demand valuing their inventory.</p>
-      </div>
-    </section>
-    <div className="rule" />
     <section className="frame faq-wrap" id="faq">
       <div className="faq-side">
-        <span className="side-index">( 10 / 10 )</span>
+        <span className="side-index">( 06 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-amber)'}} />FAQ</span>
-        <h2>Questions, <span className="hl hl-amber">answered.</span></h2>
-        <p>Something we haven’t covered? Join the waitlist and tell us what you need.</p>
+        <h2>Questions <span className="hl hl-amber">before you join</span></h2>
       </div>
       <div className="faq">
         <details open>
-          <summary><span className="q-num">01</span>What are you building?<span className="plus" /></summary>
+          <summary><span className="q-num">01</span>Who is Counter for?<span className="plus" /></summary>
           <div className="answer">
-            <p>An open execution platform for programmatic media.</p>
-            <p>Buyers bring their own models and agents. Publishers bring their supply, signals and rules. Counter connects both sides directly and gives them an open place to execute.</p>
+            <p>Advertisers looking for buying strategies tailored to their business, agencies building their own buying products, and publishers bringing their inventory and signals closer to demand.</p>
           </div>
         </details>
         <details>
-          <summary><span className="q-num">02</span>What is ARTF?<span className="plus" /></summary>
+          <summary><span className="q-num">02</span>Do I need my own models?<span className="plus" /></summary>
           <div className="answer">
-            <p>ARTF — the Agentic Real Time Framework — is an open standard from IAB Tech Lab for running software directly inside the programmatic bidstream.</p>
-            <p>A container is a sealed package of software: the code plus everything it needs to run. Because the package is standard, any platform that supports ARTF can run it the same way, without a custom integration.</p>
-            <p>Instead of sending every auction to another external system, models and other decisioning logic run in containers close to where the auction happens.</p>
-            <p>This means fewer network hops, lower latency and a standard way to deploy the same logic across supporting platforms.</p>
-            <p>Counter is built on ARTF rather than a proprietary execution format.</p>
-            <p>Read the <a href="https://iabtechlab.com/standards/artf/" target="_blank" rel="noopener">ARTF standard from IAB Tech Lab</a> and the <a href="https://github.com/IABTechLab/agentic-real-time-framework" target="_blank" rel="noopener">specification on GitHub</a>.</p>
+            <p>No. We’re building starter models you can use and adapt to your data. Teams with existing models will be able to bring their own.</p>
           </div>
         </details>
         <details>
-          <summary><span className="q-num">03</span>Is this a DSP or an SSP?<span className="plus" /></summary>
+          <summary><span className="q-num">03</span>Will I need to replace my current setup?<span className="plus" /></summary>
           <div className="answer">
-            <p>It overlaps with both, but we are not trying to recreate either in the traditional sense.</p>
-            <p>We are building an open layer for media decisioning and execution.</p>
+            <p>We’re designing Counter so you can start with a specific use case. The right setup will depend on your supply partners, data and campaign requirements, which we’ll discuss before an early-access campaign.</p>
           </div>
         </details>
         <details>
-          <summary><span className="q-num">04</span>What is open source?<span className="plus" /></summary>
+          <summary><span className="q-num">04</span>Where will the inventory come from?<span className="plus" /></summary>
           <div className="answer">
-            <p>The core auction and bidding infrastructure is open source.</p>
-            <p>We also release an open family of media decisioning models, along with the tools and examples needed to run them.</p>
-            <p>Your logs are yours. Auction logs, model decisions, campaign activity and agent actions are available to you, with no charge to access or export them.</p>
+            <p>We’re building around existing supply partners and exploring direct publisher connections. Available partners and inventory will be confirmed for early-access campaigns.</p>
           </div>
         </details>
         <details>
-          <summary><span className="q-num">05</span>Do I need to build my own models?<span className="plus" /></summary>
+          <summary><span className="q-num">05</span>When can I use it?<span className="plus" /></summary>
           <div className="answer">
-            <p>No.</p>
-            <p>You can start with open models provided by the community and fine-tune them using your own data.</p>
-            <p>The platform includes infrastructure for training, evaluating, fine-tuning, testing and deploying models into live buying.</p>
-            <p>More advanced teams can bring completely custom models.</p>
-          </div>
-        </details>
-        <details>
-          <summary><span className="q-num">06</span>How do agents work?<span className="plus" /></summary>
-          <div className="answer">
-            <p>Agents manage the longer-running work around a campaign.</p>
-            <p>They can monitor performance, adjust settings, run experiments, retrain models, investigate problems and produce reports.</p>
-            <p>You can use our agent or connect your own. The platform is API-first, so agents are native operators rather than an interface added afterwards.</p>
-            <p>You can manage a campaign from Claude, ChatGPT or another compatible agent, including recurring tasks that keep running on a schedule.</p>
-            <p>For example:</p>
-            <blockquote>“Check this campaign every morning. If CPA rises above £20, investigate why and tell me before making a major change.”</blockquote>
-          </div>
-        </details>
-        <details>
-          <summary><span className="q-num">07</span>What does direct supply mean?<span className="plus" /></summary>
-          <div className="answer">
-            <p>Every impression should have a clear path back to the publisher.</p>
-            <p>Supply can still come through infrastructure partners, but we want to avoid unnecessary reselling and opaque supply chains.</p>
-          </div>
-        </details>
-        <details>
-          <summary><span className="q-num">08</span>How can agencies make money?<span className="plus" /></summary>
-          <div className="answer">
-            <p>Transparency does not mean agencies cannot make margin.</p>
-            <p>Platform fees, optimisation fees, model fees and performance-based economics can all be explicitly built into campaigns.</p>
-          </div>
-        </details>
-        <details>
-          <summary><span className="q-num">09</span>When will it be available?<span className="plus" /></summary>
-          <div className="answer">
-            <p>We go live in Q1 2027.</p>
-            <p>We are building the first version now and are looking for agencies, brands, publishers, developers and adtech teams interested in helping shape it.</p>
-            <p><a className="btn" href="#waitlist" style={{marginTop: 8}}>Join the waitlist</a></p>
+            <p>We’re building the first version, with launch planned for Q1 2027. Join the waitlist for launch updates and opportunities to take part in early-access campaigns.</p>
           </div>
         </details>
       </div>
@@ -376,9 +229,9 @@ export default function Page() { return (<><SiteHeader />
     <div className="frame waitlist">
       <div>
         <span className="label">( Early access )</span>
-        <h2 style={{marginTop: 28}}>Join <span className="hl hl-blue">the waitlist.</span></h2>
-        <p>We’re building the first version now and go live in Q1 2027.</p>
-        <p>We’re looking for <strong>advertisers, agencies and publishers</strong> that want to run the first campaigns and help shape the platform.</p>
+        <h2 style={{marginTop: 28}}>Help shape the <span className="hl hl-blue">first campaigns on Counter</span></h2>
+        <p>We’re inviting <strong>advertisers, agencies and publishers</strong> to help test a more tailored approach to programmatic buying.</p>
+        <p>Join the waitlist for launch updates and opportunities to take part. Planned launch: Q1 2027.</p>
       </div>
       <div>
 
