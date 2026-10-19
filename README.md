@@ -6,6 +6,8 @@ The public source repository for Counter’s marketing website.
 
 The site is static HTML: `index.html` (home), `platform/index.html` and a placeholder `blog/index.html`, sharing `styles.css`. No build step or package installation is needed.
 
+Brand assets (logo, mark, avatars, social images) are in `assets/brand/`; see its README. Favicons and the web manifest are at the site root.
+
 ```sh
 python3 -m http.server 8080 --bind 127.0.0.1
 ```
