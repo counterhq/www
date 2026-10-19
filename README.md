@@ -62,8 +62,10 @@ Set these **server-only** variables locally and in the Vercel project:
 | `ATTIO_API_KEY` | Workspace token with `record_permission:read-write`, `object_configuration:read`, `list_entry:read-write`, and `list_configuration:read` |
 | `ATTIO_WAITLIST_LIST_ID` | The Counter waitlist People list UUID |
 | `RESEND_API_KEY` | Resend sending token |
-| `WAITLIST_EMAIL_FROM` | Sender on a verified Resend domain, e.g. `Counter <waitlist@your-domain>` |
+| `WAITLIST_EMAIL_FROM` | Currently `Counter <onboarding@resend.dev>`; Resend permits this test sender only to the account email (`dennis@viablesystems.ai`) |
 | `WAITLIST_EMAIL_TO` | Notification recipient, currently `dennis@viablesystems.ai` |
+
+To notify any other recipient, verify an owned sending domain in Resend and update `WAITLIST_EMAIL_FROM`.
 
 The list needs non-required, single-value **text** attributes `signup_company` and `signup_role`. To create missing attributes idempotently:
 
