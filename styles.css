@@ -283,7 +283,13 @@ footer { border-top: 1px solid var(--dark-line); }
 .page-hero .hero-copy { border-right: 1px solid var(--line); }
 .page-hero .hero-text p { max-width: 520px; }
 .systems-art { padding: 16px; }
-.systems-art .art-inner { min-height: 380px; }
+.systems-art .art-inner {
+  min-height: 380px;
+  /* Warm dot-grid field, so the platform diagram doesn't read as the homepage's blue grid. */
+  background:
+    radial-gradient(circle, rgba(30, 27, 25, .16) 1px, transparent 1.4px) 0 0 / 16px 16px,
+    radial-gradient(120% 90% at 30% 15%, #f8f1e4 0%, #f1e3c8 55%, #ebd7b2 100%);
+}
 
 .block { display: grid; grid-template-columns: 380px 1fr; }
 .block-head { padding: 88px var(--gutter); border-right: 1px solid var(--line); position: relative; }
