@@ -16,7 +16,7 @@ Colours: ink `#1e1b19`, paper `#f7f6f3`.
 | GitHub repository social preview | `social/github-social-preview.png` (1280×640, set under the repository's Settings → Social preview) |
 | Link previews (Open Graph / X card) | `social/og-image.png` (1200×630). The site serves a copy at `/assets/og-image.png`. |
 | X header | `social/x-header.png` (1500×500). Content is centred because the avatar overlaps bottom-left. |
-| LinkedIn company banner | `social/linkedin-banner.png` (1584×396). Content is right-aligned because the logo overlaps the left. |
+| LinkedIn company cover | `social/linkedin-banner.png` (2256×382, i.e. LinkedIn’s 1128×191 at 2×). Content is right of centre because the page logo overlaps the bottom-left. |
 
 Each social image also has a `-dark` variant.
 
