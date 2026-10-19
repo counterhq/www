@@ -18,7 +18,7 @@ Colours: ink `#1e1b19`, paper `#f7f6f3`.
 | X header | `social/x-header.png` (1500×500). Content is centred because the avatar overlaps bottom-left. |
 | LinkedIn company cover | `social/linkedin-banner.png` (2256×382, i.e. LinkedIn’s 1128×191 at 2×). Content is right of centre because the page logo overlaps the bottom-left. |
 
-Each social image also has a `-dark` variant.
+Each social image also has a `-dark` variant. The social images use the home page hero copy. After changing it, update `HEADLINE` and `SUBHEAD` in `scripts/social-images.mjs` and run `node scripts/social-images.mjs`. The script regenerates every social image and the `/assets/og-image.png` copy. The LinkedIn illustration comes from `scripts/social/`.
 
 ## Site icons
 
