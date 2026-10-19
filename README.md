@@ -67,13 +67,7 @@ Set these **server-only** variables locally and in the Vercel project:
 
 To notify any other recipient, verify an owned sending domain in Resend and update `WAITLIST_EMAIL_FROM`.
 
-The list needs non-required, single-value **text** attributes `signup_company` and `signup_role`. To create missing attributes idempotently:
-
-```sh
-pnpm setup:attio
-```
-
-The setup token additionally needs `list_configuration:read-write`. Runtime does not create or change the list schema. Do not commit `.env.local` or expose these variables with a `NEXT_PUBLIC_` prefix.
+The Attio list is already configured with non-required, single-value **text** attributes `signup_company` and `signup_role`. If recreating the list, add these fields in Attio and update `ATTIO_WAITLIST_LIST_ID`. Runtime does not create or change the list schema. Do not commit `.env.local` or expose these variables with a `NEXT_PUBLIC_` prefix.
 
 ## Deployment
 
@@ -94,6 +88,5 @@ pnpm test:browser
 
 Browser checks cover FAQ interaction, form success and failure (mocked responses), docs and search, mobile overflow, missing pages, and API rejection cases. `TEST_BASE_URL` can target another server.
 
-For original-versus-migrated screenshot comparisons, serve the original Git revision on port 8086 and the production build on port 3006, then run `pnpm test:visual`. It checks `/`, `/platform/`, and `/blog/` at 1440px and 390px, waits for fonts, disables animation, and writes before/after/diff PNGs plus metrics under `/tmp/counter-www-visual` (override with `VISUAL_OUTPUT`). This does not assert parity at every possible viewport or browser.
 
 No license has been selected.
