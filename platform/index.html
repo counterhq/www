@@ -179,9 +179,9 @@
 
   <section class="frame" id="systems">
     <div class="section-head">
-      <span class="side-index">( 01 / 14 )</span>
+      <span class="side-index">( 01 / 06 )</span>
       <span class="chip"><i></i>Architecture</span>
-      <h2>Two systems. <span class="hl hl-blue">Two jobs.</span></h2>
+      <h2>Models decide. <span class="hl hl-blue">Agents manage.</span></h2>
       <p class="lede">Media buying happens at two very different speeds.</p>
     </div>
     <div class="systems" style="border-top:1px solid var(--line)">
@@ -222,13 +222,9 @@
           <li>monitor performance</li>
           <li>investigate changes</li>
           <li>adjust budgets</li>
-          <li>compare models</li>
           <li>run experiments</li>
-          <li>retrain models</li>
-          <li>review supply</li>
-          <li>diagnose underdelivery</li>
-          <li>produce reports</li>
-          <li>ask for approval when needed</li>
+          <li>train and deploy models</li>
+          <li>ask for approval</li>
         </ul>
         <div class="prose" style="margin:28px 0 0">
           <p>Use Counter’s agent or bring your own.</p>
@@ -253,57 +249,51 @@
 
   <section class="frame block" id="models">
     <div class="block-head">
-      <span class="side-index">( 02 / 14 )</span>
+      <span class="side-index">( 02 / 06 )</span>
       <span class="chip"><i style="background:var(--hl-blue)"></i>Models</span>
-      <h2>Start with open models.</h2>
+      <h2>Open models.</h2>
     </div>
     <div class="block-body prose">
       <p class="lead">You don’t need a data science team to experiment with custom decisioning.</p>
+
+      <h3><span>01</span>Start with an open model.</h3>
       <p>Counter provides an open family of <strong>AdTech System One Models</strong> for common media problems.</p>
-      <p>For example:</p>
       <div class="cards">
-        <div><span class="label">Conversion propensity</span>Estimate the likelihood of an outcome.</div>
+        <div><span class="label">Conversion</span>Estimate the likelihood of an outcome.</div>
         <div><span class="label">Attention</span>Estimate the quality of an impression or placement.</div>
-        <div><span class="label">Inventory quality</span>Score the environment in which an ad will appear.</div>
-        <div><span class="label">Contextual relevance</span>Understand the relationship between an impression and a campaign.</div>
+        <div><span class="label">Quality</span>Score the environment in which an ad appears.</div>
+        <div><span class="label">Contextual</span>Understand the relationship between an impression and a campaign.</div>
         <div><span class="label">Bid pricing</span>Estimate what an impression is worth.</div>
-        <div><span class="label">Win probability</span>Estimate the likelihood of winning at a given price.</div>
-        <div><span class="label">Incrementality</span>Estimate whether an impression is likely to create an outcome that would not otherwise happen.</div>
+        <div><span class="label">Incrementality</span>Estimate whether an impression creates an outcome that would not otherwise happen.</div>
       </div>
-      <p><strong>The models are open source.</strong></p>
-      <p>Use them as they are, change them, or use them as the starting point for your own.</p>
-    </div>
-  </section>
+      <p>The models are open source. Use them as they are, change them, or build your own on top.</p>
 
-  <div class="rule"></div>
-
-  <section class="frame block" id="training">
-    <div class="block-head">
-      <span class="side-index">( 03 / 14 )</span>
-      <span class="chip"><i style="background:var(--hl-green)"></i>Training</span>
-      <h2>Fine-tune them on your data.</h2>
-    </div>
-    <div class="block-body prose">
-      <p class="lead">An open model is only a starting point.</p>
-      <p>Counter provides infrastructure to train and fine-tune models using your own campaign and outcome data.</p>
-      <p>The model lifecycle stays in one place:</p>
-      <ol class="pipeline" aria-label="Data → Train → Evaluate → Replay → Shadow → Deploy → Monitor">
+      <h3><span>02</span>Fine-tune it on your data.</h3>
+      <p>Counter provides infrastructure to train and fine-tune models on your own campaign and outcome data, with the whole lifecycle in one place.</p>
+      <ol class="pipeline" aria-label="Data → Train → Evaluate → Shadow → Deploy → Monitor">
         <li><small>01</small>Data</li>
         <li><small>02</small>Train</li>
         <li><small>03</small>Evaluate</li>
-        <li class="hot"><small>04</small>Replay</li>
-        <li class="hot"><small>05</small>Shadow</li>
-        <li><small>06</small>Deploy</li>
-        <li><small>07</small>Monitor</li>
+        <li class="hot"><small>04</small>Shadow</li>
+        <li><small>05</small>Deploy</li>
+        <li><small>06</small>Monitor</li>
       </ol>
-      <ol class="steps">
-        <li>Test a model against historical auctions.</li>
-        <li>Run it in shadow without affecting spend.</li>
-        <li>Send it a small amount of live traffic.</li>
-        <li>Compare it with the current model.</li>
-        <li>Scale it when you are ready.</li>
-      </ol>
-      <p style="margin-top:28px"><strong>Your trained models remain yours.</strong></p>
+      <p><strong>Your trained models remain yours.</strong></p>
+
+      <h3><span>03</span>Combine models.</h3>
+      <p>A media decision doesn’t have to come from one black-box algorithm. A single bid can draw on several models at once:</p>
+      <div class="equation stack" aria-label="Advertiser model × Agency model × Publisher model × Open model → Bid decision">
+        <span class="term t-blue">Advertiser model</span>
+        <span class="op">×</span>
+        <span class="term t-violet">Agency model</span>
+        <span class="op">×</span>
+        <span class="term t-amber">Publisher model</span>
+        <span class="op">×</span>
+        <span class="term t-green">Open model</span>
+        <span class="op">↓</span>
+        <span class="term result">Bid decision</span>
+      </div>
+      <p><strong>Models can be private, shared, open source or commercial. Counter is the ecosystem for portable media intelligence.</strong></p>
     </div>
   </section>
 
@@ -311,104 +301,33 @@
 
   <section class="frame block" id="artf">
     <div class="block-head">
-      <span class="side-index">( 04 / 14 )</span>
+      <span class="side-index">( 03 / 06 )</span>
       <span class="chip"><i style="background:var(--hl-blue)"></i>ARTF</span>
-      <h2>Built on an open standard.</h2>
+      <h2>Built on ARTF.</h2>
     </div>
     <div class="block-body prose">
-      <span class="label">ARTF</span>
-      <p class="lead">Counter is built on <strong>ARTF — the Agentic Real Time Framework from IAB Tech Lab.</strong></p>
-      <p>ARTF provides a standard way to run containerised software inside the infrastructure where programmatic auctions happen.</p>
-      <p>Instead of sending every auction through another external system, decisioning happens close to the bidstream.</p>
-      <div class="equation stack" aria-label="Counter model or bidder, inside an ARTF container, on host infrastructure, in the OpenRTB auction, over publisher supply">
-        <span class="term t-blue">Counter model / bidder</span>
+      <div class="equation stack artf-stack" aria-label="Your model or bidder, inside an ARTF container, on the host platform, in the OpenRTB auction, over publisher supply">
+        <span class="term t-blue">Your model / bidder</span>
         <span class="op">↓</span>
         <span class="term t-violet">ARTF container</span>
         <span class="op">↓</span>
-        <span class="term">Host infrastructure</span>
+        <span class="term">Host platform</span>
         <span class="op">↓</span>
-        <span class="term">OpenRTB auction</span>
+        <span class="term">OpenRTB</span>
         <span class="op">↓</span>
         <span class="term t-amber">Publisher supply</span>
       </div>
-      <p>ARTF gives the industry a shared way to package and run this logic rather than requiring every platform to invent a different proprietary integration.</p>
-      <p><strong>Counter builds on that standard rather than replacing it.</strong></p>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <section class="frame block" id="intelligence">
-    <div class="block-head">
-      <span class="side-index">( 05 / 14 )</span>
-      <span class="chip"><i style="background:var(--hl-amber)"></i>Participants</span>
-      <h2>Bring your own intelligence.</h2>
-    </div>
-    <div class="block-body prose">
-      <p class="lead">Counter does not assume there should be one algorithm controlling the transaction.</p>
-      <p>Different participants know different things.</p>
-      <div class="cards">
-        <div><span class="label">Advertisers</span>Bring objectives, first-party data, outcome signals and proprietary models. Own the logic used to value your media.</div>
-        <div><span class="label">Agencies</span>Build differentiated decisioning for clients. Create models, strategies and agents that can be reused across campaigns. Keep the IP you create.</div>
-        <div><span class="label">Publishers</span>Bring supply, first-party signals and knowledge about your own inventory. Control how that supply is made available and how your intelligence can be used. Run private models, share signals with selected partners or publish models for others to use.</div>
-      </div>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <section class="frame block" id="composition">
-    <div class="block-head">
-      <span class="side-index">( 06 / 14 )</span>
-      <span class="chip"><i style="background:var(--hl-violet)"></i>Composition</span>
-      <h2>Models work together.</h2>
-    </div>
-    <div class="block-body prose">
-      <p class="lead">A media decision does not have to come from one black-box algorithm.</p>
-      <p>A single decision can combine:</p>
-      <div class="equation stack" aria-label="Advertiser conversion model × Agency bidding model × Publisher quality model × Open attention model × Price model = Bid decision">
-        <span class="term t-blue">Advertiser conversion model</span>
-        <span class="op">×</span>
-        <span class="term t-violet">Agency bidding model</span>
-        <span class="op">×</span>
-        <span class="term t-amber">Publisher quality model</span>
-        <span class="op">×</span>
-        <span class="term t-green">Open attention model</span>
-        <span class="op">×</span>
-        <span class="term">Price model</span>
-        <span class="op">=</span>
-        <span class="term result">Bid decision</span>
-      </div>
-      <ul class="check-list one">
-        <li>Some models can be private.</li>
-        <li>Some can be shared between partners.</li>
-        <li>Some can be open source.</li>
+      <p class="lead">Counter is built on <strong>ARTF, the IAB Tech Lab open standard for running software inside the programmatic bidstream.</strong></p>
+      <p>Package decisioning once and run it inside supporting host infrastructure, close to the auction.</p>
+      <p>Counter builds on the industry standard rather than creating a proprietary execution format.</p>
+      <ul class="tag-list efficiency" aria-label="Efficiency">
+        <li>Fewer hops</li>
+        <li>Less unnecessary compute</li>
+        <li>Lower latency</li>
+        <li>Lower cost</li>
+        <li>Lower carbon</li>
       </ul>
-      <p style="margin-top:28px"><strong>Counter provides a common place to run them.</strong></p>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <section class="frame block" id="marketplace">
-    <div class="block-head">
-      <span class="side-index">( 07 / 14 )</span>
-      <span class="chip"><i></i>Marketplace</span>
-      <h2>Media intelligence is portable.</h2>
-    </div>
-    <div class="block-body prose">
-      <p class="lead">Most media intelligence disappears inside the platform that created it. Not on Counter.</p>
-      <p>Models are assets in their own right.</p>
-      <div class="cards">
-        <div><span class="label">Agency</span>Agencies build a model once and use it across clients.</div>
-        <div><span class="label">Advertiser</span>Advertisers keep proprietary models private.</div>
-        <div><span class="label">Publisher</span>Publishers make quality and attention models available alongside their supply.</div>
-        <div><span class="label">Developer</span>Independent developers publish open models.</div>
-        <div><span class="label">Specialist</span>Specialists offer commercial models.</div>
-      </div>
-      <p>Counter is the marketplace for this intelligence.</p>
-      <p><strong>Models belong to advertisers, agencies, publishers or the open-source community.</strong></p>
-      <p>The platform is the runtime.</p>
+      <p><a href="https://iabtechlab.com/standards/artf/" target="_blank" rel="noopener">Read the ARTF standard from IAB Tech Lab</a></p>
     </div>
   </section>
 
@@ -416,47 +335,13 @@
 
   <section class="frame block" id="agents">
     <div class="block-head">
-      <span class="side-index">( 08 / 14 )</span>
+      <span class="side-index">( 04 / 06 )</span>
       <span class="chip"><i style="background:var(--hl-violet)"></i>Agents</span>
-      <h2>Campaigns that keep running.</h2>
+      <h2>Always-on agents.</h2>
     </div>
     <div class="block-body prose">
-      <p class="lead">The real-time model makes the individual decision.</p>
-      <p>The agent looks after everything around it.</p>
-      <p>You can give an agent a simple instruction:</p>
-      <div class="prompts">
-        <div class="prompt">
-          <div class="prompt-bar"><i></i>Instruction</div>
-          <blockquote>
-            <span>Check this campaign every morning. If CPA rises by more than 15%, investigate why. Make small budget changes automatically, but ask me before changing the model or increasing total spend.</span>
-          </blockquote>
-        </div>
-        <p>Or:</p>
-        <div class="prompt">
-          <div class="prompt-bar"><i style="background:var(--hl-violet)"></i>Instruction</div>
-          <blockquote>
-            <span>Test the new store-visit model against the current model. Keep 80% of spend on the existing model until there is enough evidence to compare them.</span>
-          </blockquote>
-        </div>
-      </div>
-      <p style="margin-top:28px">The schedule keeps running without an open chat window.</p>
-      <p>Rules and approvals remain explicit.</p>
-      <p>The agent acts within the permissions you give it.</p>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <section class="frame block" id="operators">
-    <div class="block-head">
-      <span class="side-index">( 09 / 14 )</span>
-      <span class="chip"><i style="background:var(--hl-violet)"></i>API-first</span>
-      <h2>Use the agent you already have.</h2>
-    </div>
-    <div class="block-body prose">
-      <p class="lead">You don’t need another chatbot embedded inside another adtech dashboard.</p>
-      <p>The entire Counter platform is operated through APIs.</p>
-      <p>Use Counter’s interface, or connect the agent environment you already work in.</p>
+      <p class="lead">The campaign keeps running when the chat closes.</p>
+      <p>Use Counter’s agent or bring your own. Manage it from Claude, ChatGPT, your own agent or software.</p>
       <!-- Claude and OpenAI marks (Simple Icons), referenced below. -->
       <svg width="0" height="0" style="position:absolute" aria-hidden="true">
         <symbol id="logo-claude" viewBox="0 0 24 24"><path fill="#d97757" d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></symbol>
@@ -526,36 +411,31 @@ schedule(<span class="s">"0 8 * * 1-5"</span>, <span class="k">async</span> () =
           <span class="term t-blue">Counter APIs + MCP</span>
         </div>
       </div>
-      <ul class="check-list">
-        <li>Ask questions.</li>
-        <li>Create campaigns.</li>
-        <li>Set schedules.</li>
-        <li>Change budgets.</li>
-        <li>Deploy models.</li>
-        <li>Run experiments.</li>
-        <li>Inspect results.</li>
-      </ul>
-      <p style="margin-top:28px"><strong>The media platform is an API. Agents are native operators.</strong></p>
+      <p>Rules and approvals stay explicit. The agent acts within the permissions you give it.</p>
+      <p><strong>The media platform is an API. Agents are native operators.</strong></p>
     </div>
   </section>
 
   <div class="rule"></div>
 
-  <section class="frame block" id="supply">
+  <section class="frame block" id="participants">
     <div class="block-head">
-      <span class="side-index">( 10 / 14 )</span>
-      <span class="chip"><i style="background:var(--hl-amber)"></i>Supply</span>
-      <h2>Buyers and publishers connect directly.</h2>
+      <span class="side-index">( 05 / 06 )</span>
+      <span class="chip"><i style="background:var(--hl-amber)"></i>Buyers + publishers</span>
+      <h2>Buyers + publishers.</h2>
     </div>
     <div class="block-body prose">
-      <p class="lead">Counter doesn’t add another opaque layer to the supply chain.</p>
-      <p>It gives buyers and publishers a clearer path to each other.</p>
-      <p>Publishers can make inventory available directly or through supported infrastructure.</p>
-      <p>Buyers can understand where an impression came from.</p>
-      <p>Both sides can understand how the transaction was made.</p>
-      <p>Existing supply infrastructure can still be used where it makes sense.</p>
-      <p>The principle is simple:</p>
-      <p><strong>fewer unnecessary hops, less reselling and clear provenance.</strong></p>
+      <div class="parties" aria-label="Advertisers bring objectives, data and outcomes; agencies bring strategy, models and commercial logic; both connect through Counter, which connects directly with publishers, who bring supply, signals, rules and models">
+        <div class="party t-blue"><span class="label">Advertiser</span>Objectives · data · outcomes</div>
+        <span class="op" aria-hidden="true">↓</span>
+        <div class="party t-violet"><span class="label">Agency</span>Strategy · models · commercial logic</div>
+        <span class="op" aria-hidden="true">↓</span>
+        <div class="party hub">Counter</div>
+        <span class="op" aria-hidden="true">↕</span>
+        <div class="party t-amber"><span class="label">Publisher</span>Supply · signals · rules · models</div>
+      </div>
+      <p class="lead">Counter gives both sides a clearer path to one another.</p>
+      <p>Existing supply infrastructure can still be used where it makes sense. The result is <strong>fewer unnecessary hops, less reselling and clear provenance.</strong></p>
     </div>
   </section>
 
@@ -563,117 +443,36 @@ schedule(<span class="s">"0 8 * * 1-5"</span>, <span class="k">async</span> () =
 
   <section class="frame block" id="open">
     <div class="block-head">
-      <span class="side-index">( 11 / 14 )</span>
-      <span class="chip"><i style="background:var(--hl-green)"></i>Open source</span>
-      <h2>Open from the bottom up.</h2>
+      <span class="side-index">( 06 / 06 )</span>
+      <span class="chip"><i style="background:var(--hl-green)"></i>Open</span>
+      <h2>You own it.</h2>
     </div>
     <div class="block-body prose">
-      <p class="lead">Counter is built in the open.</p>
-      <div class="cards">
-        <div><span class="label">Open auction server</span>The core real-time infrastructure is open source. Inspect it. Run it. Change it. Build on it.</div>
-        <div><span class="label">Open bidder</span>The logic used to participate in auctions is visible rather than hidden inside a proprietary platform.</div>
-        <div><span class="label">Open models</span>Start with open implementations and training recipes rather than a black-box optimisation product.</div>
-        <div><span class="label">Open APIs</span>Everything Counter can do is available programmatically.</div>
-        <div><span class="label">Open docs</span>Understand how Counter works without speaking to sales.</div>
-        <div><span class="label">Your data</span>Your campaign data remains available to you.</div>
-        <div><span class="label">Your models</span>Models you train or bring remain yours.</div>
-        <div><span class="label">Your logs</span>Auction logs, model decisions and agent actions are available to you. There is no additional fee to access or export your own logs.</div>
-      </div>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <section class="frame block" id="inspect">
-    <div class="block-head">
-      <span class="side-index">( 12 / 14 )</span>
-      <span class="chip"><i style="background:var(--hl-amber)"></i>Logs</span>
-      <h2>Inspect every decision.</h2>
-    </div>
-    <div class="block-body prose">
-      <p class="lead">For any auction, you can see exactly what happened.</p>
-      <p>For example:</p>
-      <div class="equation stack compact" aria-label="Opportunity → Features → Models used → Model scores → Decision → Bid → Auction result → Outcome">
+      <ul class="own-list">
+        <li><strong>The auction server is open.</strong>Inspect it, run it, extend it.</li>
+        <li><strong>The bidder is open.</strong>See the logic executing your media.</li>
+        <li><strong>The models are open.</strong>Use ours or build your own.</li>
+        <li><strong>The APIs are open.</strong>Everything is programmable.</li>
+        <li class="yours"><strong>Your models are yours.</strong></li>
+        <li class="yours"><strong>Your data is yours.</strong></li>
+        <li class="yours"><strong>Your logs are yours.</strong>No fee to access or export them.</li>
+      </ul>
+      <p>Every decision is traceable, from the impression to the outcome:</p>
+      <div class="equation lineage" aria-label="Opportunity → Models → Scores → Decision → Bid → Result → Outcome">
         <span class="term">Opportunity</span>
-        <span class="op">↓</span>
-        <span class="term">Features</span>
-        <span class="op">↓</span>
-        <span class="term">Models used</span>
-        <span class="op">↓</span>
-        <span class="term">Model scores</span>
-        <span class="op">↓</span>
+        <span class="op">→</span>
+        <span class="term">Models</span>
+        <span class="op">→</span>
+        <span class="term">Scores</span>
+        <span class="op">→</span>
         <span class="term">Decision</span>
-        <span class="op">↓</span>
-        <span class="term">Bid</span>
-        <span class="op">↓</span>
-        <span class="term">Auction result</span>
-        <span class="op">↓</span>
+        <span class="op">→</span>
+        <span class="term t-blue">Bid</span>
+        <span class="op">→</span>
+        <span class="term">Result</span>
+        <span class="op">→</span>
         <span class="term t-amber">Outcome</span>
       </div>
-      <p>And for the campaign around it:</p>
-      <div class="equation stack compact" aria-label="Agent observation → Reason for change → Action → Approval, if required → Result">
-        <span class="term">Agent observation</span>
-        <span class="op">↓</span>
-        <span class="term">Reason for change</span>
-        <span class="op">↓</span>
-        <span class="term">Action</span>
-        <span class="op">↓</span>
-        <span class="term">Approval, if required</span>
-        <span class="op">↓</span>
-        <span class="term t-violet">Result</span>
-      </div>
-      <p>This is not just transparency at reporting time.</p>
-      <p><strong>It is traceability from campaign objective down to an individual decision.</strong></p>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <section class="frame block" id="efficiency">
-    <div class="block-head">
-      <span class="side-index">( 13 / 14 )</span>
-      <span class="chip"><i style="background:var(--hl-green)"></i>Efficiency</span>
-      <h2>Efficient by design.</h2>
-    </div>
-    <div class="block-body prose">
-      <p class="lead">Programmatic systems process enormous volumes of data.</p>
-      <p>Small inefficiencies become large infrastructure costs.</p>
-      <p>Counter is built to do less unnecessary work.</p>
-      <div class="equation" aria-label="Waste less compute → lower cost → lower latency → lower carbon">
-        <span class="term">Waste less compute</span>
-        <span class="op">→</span>
-        <span class="term t-blue">lower cost</span>
-        <span class="op">→</span>
-        <span class="term t-violet">lower latency</span>
-        <span class="op">→</span>
-        <span class="term t-green">lower carbon</span>
-      </div>
-      <p>Efficiency is not a separate sustainability feature.</p>
-      <p><strong>It is part of the architecture.</strong></p>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <section class="frame block" id="developers">
-    <div class="block-head">
-      <span class="side-index">( 14 / 14 )</span>
-      <span class="chip"><i style="background:var(--hl-violet)"></i>Developers</span>
-      <h2>For developers</h2>
-    </div>
-    <div class="block-body prose">
-      <p class="lead">One shorthand for Counter is:</p>
-      <div class="equation stack" aria-label="Cloudflare Workers for RTB + Hugging Face for buying models + an agentic control plane">
-        <span class="term t-amber">Cloudflare Workers for RTB</span>
-        <span class="op">+</span>
-        <span class="term t-blue">Hugging Face for buying models</span>
-        <span class="op">+</span>
-        <span class="term t-violet">an agentic control plane</span>
-      </div>
-      <p>A portable execution environment for real-time decisioning.</p>
-      <p>An open ecosystem of models that can be trained and shared.</p>
-      <p>And an always-on layer that operates campaigns around them.</p>
-      <p><strong>All built on open standards.</strong></p>
     </div>
   </section>
 </main>
@@ -682,14 +481,15 @@ schedule(<span class="s">"0 8 * * 1-5"</span>, <span class="k">async</span> () =
   <div class="frame closing">
     <span class="label">( Get involved )</span>
     <h2 style="margin-top:28px">Build on <span class="hl hl-blue" style="color:var(--ink)">Counter.</span></h2>
+    <p>For developers, the shorthand is:</p>
+    <div class="equation stack" aria-label="Cloudflare Workers for RTB + Hugging Face for buying models + an agentic control plane">
+      <span class="term t-amber">Cloudflare Workers for RTB</span>
+      <span class="op">+</span>
+      <span class="term t-blue">Hugging Face for buying models</span>
+      <span class="op">+</span>
+      <span class="term t-violet">an agentic control plane</span>
+    </div>
     <p>Counter is for advertisers, agencies, publishers, model builders and adtech developers who want a more open way to buy and sell media.</p>
-    <ul class="open-lines">
-      <li>The bidder is open.</li>
-      <li>The models are open.</li>
-      <li>The APIs are open.</li>
-      <li>The docs are open.</li>
-      <li>Anyone can participate.</li>
-    </ul>
     <a class="btn" href="../#waitlist">Join the waitlist</a>
   </div>
   <footer>
