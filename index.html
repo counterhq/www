@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Counter — Own how your media is bought</title>
+  <meta name="description" content="An open platform for agencies and brands to run their own buying logic against direct publisher supply.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f6f3;
+      --bg-raised: #fbfaf8;
+      --ink: #1e1b19;
+      --ink-2: #4a4542;
+      --ink-3: #8a847f;
+      --line: #e3e0db;
+      --line-strong: #cfcac3;
+      --dark: #1e1b19;
+      --dark-2: #2a2725;
+      --dark-line: #3a3633;
+      --hl-blue: #d9e6fb;
+      --hl-violet: #e3dcfb;
+      --hl-amber: #f6dfb3;
+      --hl-green: #d5f0e1;
+      --accent: #3b6fd8;
+      --accent-soft: #b7cdf3;
+      --sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+      --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      --max: 1152px;
+      --gutter: 36px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    h1, h2, h3 { font-weight: 400; letter-spacing: -0.025em; margin: 0; }
+    p { margin: 0; }
+
+    /* Drafting-grid frame: a centred column bounded by vertical rules. */
+    .frame {
+      max-width: var(--max);
+      margin: 0 auto;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      position: relative;
+    }
+    .rule { border-top: 1px solid var(--line); position: relative; }
+    .rule::before, .rule::after {
+      content: ""; position: absolute; top: -3px; width: 5px; height: 5px;
+      background: var(--line-strong); border-radius: 50%;
+    }
+    .rule::before { left: calc(50% - var(--max) / 2 - 3px); }
+    .rule::after { right: calc(50% - var(--max) / 2 - 3px); }
+    @media (max-width: 1160px) { .rule::before, .rule::after { display: none; } }
+
+    .label {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--ink-2); border-radius: 4px;
+      padding: 3px 9px; font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2);
+    }
+    .chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-soft); }
+    .hl { padding: 0 0.12em; border-radius: 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+    .hl-blue { background: var(--hl-blue); }
+    .hl-violet { background: var(--hl-violet); }
+    .hl-amber { background: var(--hl-amber); }
+    .muted { color: var(--ink-3); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px; padding: 0 28px; border-radius: 4px;
+      font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none; cursor: pointer;
+      border: 1px solid var(--ink); background: transparent; color: var(--ink);
+      transition: background .15s, color .15s;
+    }
+    .btn:hover { background: var(--ink); color: var(--bg); }
+    .btn-solid { background: var(--ink); color: var(--bg); }
+    .btn-solid:hover { background: #3a3633; }
+    .btn:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* Nav */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 60px; padding: 0 var(--gutter); }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { text-decoration: none; font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+    .nav-links a:hover { color: var(--ink); }
+    .nav .btn { min-height: 36px; padding: 0 14px; font-size: 12px; }
+
+    .banner { background: var(--dark); color: #e9e6e2; text-align: center; padding: 12px var(--gutter); font-size: 14px; }
+    .banner .label { color: var(--hl-amber); margin-right: 10px; font-size: 11px; }
+
+    /* Hero */
+    .hero { display: grid; grid-template-columns: 1fr 1fr; }
+    .hero-copy { display: flex; flex-direction: column; border-right: 1px solid var(--line); }
+    .hero-text { padding: 96px var(--gutter) 56px; flex: 1; }
+    .hero h1 { font-size: clamp(40px, 5.2vw, 62px); line-height: 1.04; margin-bottom: 28px; }
+    .hero-text p { font-size: 17px; color: var(--ink-2); max-width: 470px; }
+    .hero-text p + p { margin-top: 14px; }
+    .hero-cta { border-top: 1px solid var(--line); background: var(--bg-raised); padding: 28px var(--gutter); }
+    .hero-cta .note { margin-top: 14px; font-size: 14px; color: var(--ink-3); max-width: 420px; }
+    .hero-art { padding: 16px; }
+    .art-panel {
+      height: 100%; min-height: 420px; border: 1px dashed var(--line-strong); padding: 8px;
+    }
+    .art-inner {
+      height: 100%; position: relative; overflow: hidden;
+      background:
+        linear-gradient(rgba(255,255,255,.55) 1px, transparent 1px) 0 0 / 32px 32px,
+        linear-gradient(90deg, rgba(255,255,255,.55) 1px, transparent 1px) 0 0 / 32px 32px,
+        radial-gradient(120% 90% at 30% 20%, #c5d8f6 0%, #a9c4ef 55%, #9cbbec 100%);
+      display: grid; place-items: center;
+    }
+    .art-inner svg { width: 100%; height: auto; max-height: 560px; }
+
+    /* Sections */
+    .section-head { padding: 104px var(--gutter) 72px; position: relative; }
+    .section-head .chip { margin-bottom: 40px; }
+    .section-head h2 { font-size: clamp(32px, 4vw, 46px); line-height: 1.12; max-width: 900px; }
+    .section-head.center { text-align: center; }
+    .section-head.center h2 { margin: 0 auto; }
+    .section-head .lede { margin-top: 28px; font-size: 18px; color: var(--ink-2); max-width: 620px; }
+    .section-head.center .lede { margin-left: auto; margin-right: auto; }
+    .side-index {
+      position: absolute; top: 24px; left: 10px; writing-mode: vertical-rl; transform: rotate(180deg);
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--line-strong);
+    }
+
+    .pillars { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .pillar { padding: 32px var(--gutter) 44px 28px; border-right: 1px solid var(--line); position: relative; }
+    .pillar:last-child { border-right: 0; }
+    .pillar .num { font-family: var(--mono); font-size: 14px; color: var(--ink-3); margin-bottom: 64px; }
+    .pillar .icon {
+      width: 30px; height: 30px; border: 1px solid var(--line-strong); border-radius: 4px;
+      display: grid; place-items: center; margin-bottom: 18px; background: var(--bg-raised);
+    }
+    .pillar h3 { font-size: 22px; margin-bottom: 12px; }
+    .pillar p { color: var(--ink-2); font-size: 15px; }
+    .pillar::before {
+      content: ""; position: absolute; top: 0; left: 0; height: 2px; width: 0;
+      background: var(--accent); transition: width .35s ease;
+    }
+    .pillar:hover::before { width: 100%; }
+
+    /* FAQ */
+    .faq-wrap { display: grid; grid-template-columns: 340px 1fr; }
+    .faq-side { padding: 104px var(--gutter); border-right: 1px solid var(--line); }
+    .faq-side h2 { font-size: clamp(32px, 4vw, 46px); line-height: 1.1; margin-top: 40px; }
+    .faq-side p { margin-top: 20px; color: var(--ink-2); }
+    .faq { padding: 72px 0; }
+    details { border-bottom: 1px solid var(--line); }
+    details:first-child { border-top: 1px solid var(--line); }
+    summary {
+      list-style: none; cursor: pointer; display: grid; grid-template-columns: 48px 1fr 24px;
+      align-items: baseline; gap: 8px; padding: 26px var(--gutter);
+      font-size: 20px; letter-spacing: -0.015em;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary .q-num { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+    summary .plus { position: relative; width: 14px; height: 14px; align-self: center; }
+    summary .plus::before, summary .plus::after {
+      content: ""; position: absolute; background: var(--ink-2); top: 6px; left: 0; width: 14px; height: 1.5px; transition: transform .2s;
+    }
+    summary .plus::after { transform: rotate(90deg); }
+    details[open] summary .plus::after { transform: rotate(0deg); }
+    summary:hover { background: var(--bg-raised); }
+    .answer { padding: 0 var(--gutter) 30px calc(var(--gutter) + 56px); color: var(--ink-2); max-width: 760px; }
+    .answer p + p { margin-top: 12px; }
+
+    /* Waitlist band */
+    .dark { background: var(--dark); color: #ece9e5; }
+    .dark .frame { border-color: var(--dark-line); }
+    .waitlist { display: grid; grid-template-columns: 1.1fr 1fr; }
+    .waitlist > div { padding: 104px var(--gutter); }
+    .waitlist > div:first-child { border-right: 1px solid var(--dark-line); }
+    .waitlist h2 { font-size: clamp(32px, 4vw, 46px); line-height: 1.1; }
+    .waitlist .hl { color: var(--ink); }
+    .waitlist p { margin-top: 22px; color: #b8b2ac; max-width: 460px; }
+    .dark .label { color: #8d8781; }
+    form { display: flex; flex-direction: column; gap: 14px; }
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    input, select {
+      font: inherit; font-size: 16px; color: #ece9e5; background: var(--dark-2);
+      border: 1px solid var(--dark-line); border-radius: 4px; padding: 12px 14px; min-height: 46px;
+    }
+    input::placeholder { color: #77716c; }
+    select { appearance: none; -webkit-appearance: none; background-image: linear-gradient(45deg, transparent 50%, #8d8781 50%), linear-gradient(135deg, #8d8781 50%, transparent 50%); background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%; background-size: 5px 5px; background-repeat: no-repeat; }
+    .dark .btn { border-color: #ece9e5; color: var(--ink); background: #ece9e5; margin-top: 6px; }
+    .dark .btn:hover { background: #fff; }
+    .form-status { font-family: var(--mono); font-size: 13px; color: var(--hl-green); min-height: 20px; }
+
+    footer { border-top: 1px solid var(--dark-line); }
+    .foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 28px var(--gutter); flex-wrap: wrap; }
+    .foot .brand { font-size: 18px; color: #ece9e5; }
+
+    @media (max-width: 960px) {
+      :root { --gutter: 24px; }
+      .hero, .waitlist, .faq-wrap { grid-template-columns: 1fr; }
+      .hero-copy, .waitlist > div:first-child, .faq-side { border-right: 0; }
+      .waitlist > div:first-child, .faq-side { border-bottom: 1px solid var(--line); }
+      .waitlist > div:first-child { border-bottom-color: var(--dark-line); }
+      .hero-text { padding-top: 64px; }
+      .hero-art { border-top: 1px solid var(--line); }
+      .art-panel { min-height: 0; }
+      .pillars { grid-template-columns: 1fr 1fr; }
+      .pillar:nth-child(2) { border-right: 0; }
+      .pillar:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .faq-side { padding-bottom: 56px; }
+      .faq { padding: 0 0 56px; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      :root { --gutter: 16px; }
+      .frame { border-left: 0; border-right: 0; }
+      .pillars { grid-template-columns: 1fr; }
+      .pillar { border-right: 0; border-bottom: 1px solid var(--line); }
+      .pillar:last-child { border-bottom: 0; }
+      .pillar .num { margin-bottom: 28px; }
+      .section-head, .waitlist > div, .faq-side { padding-top: 72px; padding-bottom: 56px; }
+      summary { grid-template-columns: 36px 1fr 20px; font-size: 18px; padding-top: 22px; padding-bottom: 22px; }
+      .answer { padding-left: calc(var(--gutter) + 44px); }
+      .hero-cta .btn { width: 100%; }
+      .banner .label { display: block; margin: 0 0 4px; }
+      .side-index { display: none; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .flow { stroke-dasharray: 4 6; animation: flow 1.6s linear infinite; }
+      @keyframes flow { to { stroke-dashoffset: -20; } }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="frame nav">
+    <a class="brand" href="#top" aria-label="Counter home">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <path d="M13 2 24 8l-11 6L2 8l11-6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M2 13l11 6 11-6M2 18l11 6 11-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      </svg>
+      counter
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#why">Why</a>
+      <a href="#principles">Principles</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn" href="#waitlist">Join the waitlist</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="frame hero">
+    <div class="hero-copy">
+      <div class="hero-text">
+        <h1>Own how your media is bought.</h1>
+        <p>An open platform for agencies and brands to run their own buying logic against direct publisher supply.</p>
+        <p>Use your own data and models, or start with open ones. See what you buy, why you bought it, and where the money goes.</p>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-solid" href="#waitlist">Join the waitlist</a>
+        <p class="note">We’re building this now. Join for early access and to help shape the product.</p>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="art-panel">
+        <div class="art-inner">
+          <!-- Illustrative only: buyer logic layer sitting over direct paths to publisher supply. -->
+          <svg viewBox="0 0 520 560" role="img" aria-label="Diagram: your buying logic as a layer connected by direct paths to publisher supply">
+            <defs>
+              <linearGradient id="slab" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#e9f0fc" stop-opacity=".95"/>
+                <stop offset="1" stop-color="#cfdcf6" stop-opacity=".85"/>
+              </linearGradient>
+            </defs>
+            <g font-family="DM Mono, ui-monospace, monospace" font-size="10" letter-spacing="1">
+              <!-- Publisher sheets -->
+              <g stroke="#3b6fd8" stroke-width="1" fill="#fbfaf8">
+                <path d="M260 372 450 462 260 552 70 462Z" opacity=".55"/>
+                <path d="M260 360 450 450 260 540 70 450Z" opacity=".8"/>
+                <path d="M260 348 450 438 260 528 70 438Z"/>
+              </g>
+              <!-- Publisher tiles on the top sheet -->
+              <g stroke="#3b6fd8" stroke-width=".8">
+                <path d="M170 420 210 401 250 420 210 439Z" fill="#f6dfb3"/>
+                <path d="M270 420 310 401 350 420 310 439Z" fill="#e3dcfb"/>
+                <path d="M220 452 260 433 300 452 260 471Z" fill="#d5f0e1"/>
+                <path d="M120 446 160 427 200 446 160 465Z" fill="#d9e6fb"/>
+                <path d="M320 446 360 427 400 446 360 465Z" fill="#d9e6fb"/>
+              </g>
+              <!-- Direct paths -->
+              <g stroke="#1e1b19" stroke-width="1.1" fill="none" class="flow">
+                <path d="M210 230 210 420"/>
+                <path d="M310 230 310 420"/>
+                <path d="M260 250 260 452"/>
+                <path d="M160 205 160 446"/>
+                <path d="M360 205 360 446"/>
+              </g>
+              <g fill="#1e1b19">
+                <circle cx="210" cy="420" r="3"/><circle cx="310" cy="420" r="3"/>
+                <circle cx="260" cy="452" r="3"/><circle cx="160" cy="446" r="3"/><circle cx="360" cy="446" r="3"/>
+              </g>
+              <!-- Buyer logic slab -->
+              <path d="M260 90 450 180 260 270 70 180Z" fill="url(#slab)" stroke="#3b6fd8" stroke-width="1.2"/>
+              <path d="M70 180v26l190 90 190-90v-26" fill="#bcd0f2" fill-opacity=".7" stroke="#3b6fd8" stroke-width="1.2"/>
+              <path d="M260 270v26" stroke="#3b6fd8" stroke-width="1.2"/>
+              <path d="M260 116 396 180 260 244 124 180Z" fill="none" stroke="#3b6fd8" stroke-dasharray="3 4"/>
+              <!-- Model block on slab -->
+              <path d="M260 150 300 169 260 188 220 169Z" fill="#3b6fd8"/>
+              <path d="M220 169v12l40 19 40-19v-12" fill="#2c58b4"/>
+              <path d="M248 166 272 166M248 172 266 172" stroke="#fff" stroke-width="1.6" transform="skewY(0)"/>
+              <!-- Tags -->
+              <g>
+                <rect x="352" y="96" width="132" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/>
+                <text x="364" y="113" fill="#1e1b19">YOUR MODELS</text>
+                <path d="M352 109H330l-24 40" stroke="#1e1b19" fill="none" stroke-dasharray="2 3"/>
+                <rect x="28" y="96" width="132" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/>
+                <text x="40" y="113" fill="#1e1b19">YOUR RULES</text>
+                <path d="M160 109h22l30 46" stroke="#1e1b19" fill="none" stroke-dasharray="2 3"/>
+                <rect x="372" y="300" width="124" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/>
+                <text x="384" y="317" fill="#1e1b19">DIRECT PATH</text>
+                <path d="M372 313h-12" stroke="#1e1b19"/>
+                <rect x="24" y="500" width="112" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/>
+                <text x="36" y="517" fill="#1e1b19">PUBLISHERS</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame" id="why">
+    <div class="section-head">
+      <span class="side-index">( 01 / 03 )</span>
+      <span class="chip"><i></i>Why</span>
+      <h2>Programmatic buying should be <span class="hl hl-blue">more open.</span> <span class="muted">Today, much of the decision-making sits inside platforms you do not control.</span></h2>
+      <p class="lede">We want to make it possible for agencies and brands to own that layer themselves.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame pillars" id="principles" aria-label="Principles">
+    <article class="pillar">
+      <div class="num">[01]</div>
+      <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="4" cy="4" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="8" cy="12" r="2"/><path d="M4 6v1.5L8 10M12 6v1.5L8 10"/></svg></div>
+      <h3>Your decisions</h3>
+      <p>Choose how impressions are valued and bought. Bring your own models or start with ours.</p>
+    </article>
+    <article class="pillar">
+      <div class="num">[02]</div>
+      <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2 8h12M10 4l4 4-4 4"/></svg></div>
+      <h3>Direct supply</h3>
+      <p>Buy through clear, direct paths to publishers, without unnecessary reselling.</p>
+    </article>
+    <article class="pillar">
+      <div class="num">[03]</div>
+      <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="9" width="3" height="5"/><rect x="6.5" y="5" width="3" height="9"/><rect x="11" y="2" width="3" height="12"/></svg></div>
+      <h3>Clear economics</h3>
+      <p>Know what the media costs, what the technology costs, and where agency margin comes from.</p>
+    </article>
+    <article class="pillar">
+      <div class="num">[04]</div>
+      <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 4 1.5 8 5 12M11 4l3.5 4L11 12M9.5 2.5l-3 11"/></svg></div>
+      <h3>Open by default</h3>
+      <p>The core execution technology will be open source. Your models and data remain yours.</p>
+    </article>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame faq-wrap" id="faq">
+    <div class="faq-side">
+      <span class="chip"><i style="background:var(--hl-amber)"></i>FAQ</span>
+      <h2>Questions, <span class="hl hl-amber">answered.</span></h2>
+      <p>Something we haven’t covered? Join the waitlist and tell us what you need.</p>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary><span class="q-num">01</span>What are you building?<span class="plus"></span></summary>
+        <div class="answer">
+          <p>A new way to buy programmatic media where the buyer has much more control.</p>
+          <p>Instead of handing the decision to a traditional DSP, agencies and brands can decide how each impression should be valued using their own data, rules and models.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="q-num">02</span>Is this a DSP or an SSP?<span class="plus"></span></summary>
+        <div class="answer">
+          <p>It overlaps with both, but we are not trying to recreate either in the traditional sense.</p>
+          <p>We are building the layer that connects your buying decisions to publisher supply.</p>
+          <p>Over time, more of that infrastructure will be open source.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="q-num">03</span>What does “direct supply” mean?<span class="plus"></span></summary>
+        <div class="answer">
+          <p>We want every impression to have a clear path back to the publisher.</p>
+          <p>That does not mean every publisher needs to integrate with us directly. Supply can still come through partners such as SSPs, as long as the path is transparent and does not pass through unnecessary resellers.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="q-num">04</span>Do I need to build my own models?<span class="plus"></span></summary>
+        <div class="answer">
+          <p>No.</p>
+          <p>We plan to provide open models and training examples for common problems such as conversion, attention, inventory quality and bid pricing.</p>
+          <p>Teams with their own data or modelling capability will also be able to build and deploy their own.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="q-num">05</span>Where do AI agents fit?<span class="plus"></span></summary>
+        <div class="answer">
+          <p>Agents can manage the longer-running work around a campaign: monitoring performance, testing ideas, adjusting budgets, retraining models and reporting results.</p>
+          <p>The real-time buying decision stays fast and predictable.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="q-num">06</span>How can agencies make money?<span class="plus"></span></summary>
+        <div class="answer">
+          <p>Transparency does not mean agencies cannot make margin.</p>
+          <p>We want commercial terms to be explicit: platform fees, optimisation fees, model fees, performance fees or other agreed economics can all be part of the campaign.</p>
+          <p>The client should be able to understand what they are paying for.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="q-num">07</span>Is it open source?<span class="plus"></span></summary>
+        <div class="answer">
+          <p>That is the plan.</p>
+          <p>We want the core buying and execution infrastructure to be open source, so teams can inspect it, run it themselves and own the technology they build on top.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="q-num">08</span>What does container-native mean?<span class="plus"></span></summary>
+        <div class="answer">
+          <p>The buying logic is packaged so it can run close to the supply rather than sending every auction back through a traditional DSP.</p>
+          <p>For most users, this should simply mean faster decisions, lower infrastructure costs and more control.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="q-num">09</span>When will it be available?<span class="plus"></span></summary>
+        <div class="answer">
+          <p>We are at the beginning.</p>
+          <p>We are looking for agencies, brands, publishers and adtech teams that want to help shape the first version.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+</main>
+
+<section class="dark" id="waitlist">
+  <div class="frame waitlist">
+    <div>
+      <span class="label">( Early access )</span>
+      <h2 style="margin-top:28px">Help shape <span class="hl hl-blue">the first version.</span></h2>
+      <p>We’re building this now. We are looking for agencies, brands, publishers and adtech teams that want to help shape the first version.</p>
+    </div>
+    <div>
+      <!-- Not wired to a backend yet: set data-endpoint to a URL that accepts a JSON POST. -->
+      <form id="waitlist-form" data-endpoint="" novalidate>
+        <div class="field">
+          <label class="label" for="email">Work email</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+        </div>
+        <div class="field">
+          <label class="label" for="company">Company</label>
+          <input id="company" name="company" type="text" autocomplete="organization" placeholder="Company name">
+        </div>
+        <div class="field">
+          <label class="label" for="role">I’m with</label>
+          <select id="role" name="role">
+            <option value="agency">An agency</option>
+            <option value="brand">A brand</option>
+            <option value="publisher">A publisher</option>
+            <option value="adtech">An adtech team</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+        <button class="btn" type="submit">Join the waitlist</button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+  <footer>
+    <div class="frame foot">
+      <a class="brand" href="#top">counter</a>
+      <span class="label">© 2026 Counter</span>
+    </div>
+  </footer>
+</section>
+
+<script>
+  (function () {
+    var form = document.getElementById('waitlist-form');
+    var status = document.getElementById('form-status');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = form.email.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.style.color = 'var(--hl-amber)';
+        status.textContent = 'Please enter a valid email address.';
+        form.email.focus();
+        return;
+      }
+      var endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        status.style.color = 'var(--hl-amber)';
+        status.textContent = 'The waitlist isn’t open yet. Please check back soon.';
+        return;
+      }
+      var body = JSON.stringify({ email: email, company: form.company.value.trim(), role: form.role.value });
+      fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body })
+        .then(function (r) {
+          if (!r.ok) throw new Error(r.status);
+          status.style.color = '';
+          status.textContent = 'Thanks — you’re on the list.';
+          form.reset();
+        })
+        .catch(function () {
+          status.style.color = 'var(--hl-amber)';
+          status.textContent = 'Something went wrong. Please try again.';
+        });
+    });
+  })();
+</script>
+</body>
+</html>
