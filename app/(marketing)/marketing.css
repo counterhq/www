@@ -615,3 +615,8 @@ details[open]::details-content { block-size: auto; }
     #efede8;
 }
 .band .frame { border-color: var(--line-strong); }
+
+.foot-links { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.foot-links a { text-decoration: none; }
+.foot-links a:hover { color: #ece9e5; }
+.blog-post article a { text-decoration: underline; }

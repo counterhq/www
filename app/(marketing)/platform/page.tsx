@@ -1,4 +1,5 @@
 import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata("Counter — The platform", "Open execution for programmatic media. Models make decisions in the bidstream. Always-on agents manage everything around them.", "/platform/");
 // Isometric cube in the hero's style: top, left and right faces, centred on the top face's middle.
@@ -562,11 +563,6 @@ export default function Page() { return (<><SiteHeader current="platform" />
       <p>Counter is for advertisers, agencies, publishers, model builders and adtech developers who want a more open way to buy and sell media.</p>
       <a className="btn" href="/#waitlist">Join the waitlist</a>
     </div>
-    <footer>
-      <div className="frame foot">
-        <a className="brand" href="/">counter</a>
-        <span className="label">© 2026 Counter</span>
-      </div>
-    </footer>
+    <SiteFooter />
   </section>
 </>); }

@@ -1,4 +1,5 @@
 import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
 import { getPosts } from '@/lib/source';
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata("Counter — Blog", "The Counter blog.", "/blog/");
@@ -13,11 +14,6 @@ export default function Page() { return (<><SiteHeader current="blog" />
     </section>
   </main>
   <section className="dark">
-    <footer>
-      <div className="frame foot">
-        <a className="brand" href="/">counter</a>
-        <span className="label">© 2026 Counter</span>
-      </div>
-    </footer>
+    <SiteFooter />
   </section>
 </>); }

@@ -1,4 +1,5 @@
 import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
 import { WaitlistForm } from "@/components/waitlist-form";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata("Counter — Programmatic buying built around your outcomes", "Counter brings advertisers, agencies and publishers together to buy and sell media using custom buying strategies.", "/");
@@ -199,25 +200,43 @@ export default function Page() { return (<><SiteHeader />
           </div>
         </details>
         <details>
-          <summary><span className="q-num">02</span>Do I need my own models?<span className="plus" /></summary>
+          <summary><span className="q-num">02</span>How is Counter different from a DSP?<span className="plus" /></summary>
+          <div className="answer">
+            <p>A DSP applies the same bidding logic to every buyer. Counter lets you run your own models to decide which impressions to buy and what to pay, on open technology you can inspect.</p>
+          </div>
+        </details>
+        <details>
+          <summary><span className="q-num">03</span>Do I need my own models?<span className="plus" /></summary>
           <div className="answer">
             <p>No. We’re building starter models you can use and adapt to your data. Teams with existing models will be able to bring their own.</p>
           </div>
         </details>
         <details>
-          <summary><span className="q-num">03</span>Will I need to replace my current setup?<span className="plus" /></summary>
+          <summary><span className="q-num">04</span>Who owns my data and models?<span className="plus" /></summary>
+          <div className="answer">
+            <p>You do. Your data and models are yours to keep, export, delete or use however you like.</p>
+          </div>
+        </details>
+        <details>
+          <summary><span className="q-num">05</span>Will I need to replace my current setup?<span className="plus" /></summary>
           <div className="answer">
             <p>We’re designing Counter so you can start with a specific use case. The right setup will depend on your supply partners, data and campaign requirements, which we’ll discuss before an early-access campaign.</p>
           </div>
         </details>
         <details>
-          <summary><span className="q-num">04</span>Where will the inventory come from?<span className="plus" /></summary>
+          <summary><span className="q-num">06</span>Where will the inventory come from?<span className="plus" /></summary>
           <div className="answer">
             <p>We’re building around existing supply partners and exploring direct publisher connections. Available partners and inventory will be confirmed for early-access campaigns.</p>
           </div>
         </details>
         <details>
-          <summary><span className="q-num">05</span>When can I use it?<span className="plus" /></summary>
+          <summary><span className="q-num">07</span>How much will it cost?<span className="plus" /></summary>
+          <div className="answer">
+            <p>We’re working out pricing models with our early partners. Pricing could be based on compute or on CPM.</p>
+          </div>
+        </details>
+        <details>
+          <summary><span className="q-num">08</span>When can I use it?<span className="plus" /></summary>
           <div className="answer">
             <p>We’re building the first version, with launch planned for Q1 2027. Join the waitlist for launch updates and opportunities to take part in early-access campaigns.</p>
           </div>
@@ -237,11 +256,6 @@ export default function Page() { return (<><SiteHeader />
 
         <WaitlistForm /></div>
     </div>
-    <footer>
-      <div className="frame foot">
-        <a className="brand" href="#top">counter</a>
-        <span className="label">© 2026 Counter</span>
-      </div>
-    </footer>
+    <SiteFooter home="#top" />
   </section>
 </>); }
