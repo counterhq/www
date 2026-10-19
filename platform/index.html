@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Counter — The platform</title>
+  <meta name="description" content="An open execution platform for programmatic media. Models make decisions in the bid stream. Always-on agents manage everything around them.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header>
+  <div class="frame nav">
+    <a class="brand" href="../" aria-label="Counter home">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <path d="M13 2 24 8l-11 6L2 8l11-6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M2 13l11 6 11-6M2 18l11 6 11-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      </svg>
+      counter
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="./" aria-current="page">Platform</a>
+      <a href="../#why">Why</a>
+      <a href="../#open">Open</a>
+      <a href="../#faq">FAQ</a>
+    </nav>
+    <a class="btn" href="../#waitlist">Join the waitlist</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="frame page-hero">
+    <div class="hero-copy">
+      <div class="hero-text">
+        <span class="chip" style="margin-bottom:32px"><i></i>Platform</span>
+        <h1>The platform</h1>
+        <p>An open execution platform for programmatic media.</p>
+        <p>Models make decisions in the bid stream. Always-on agents manage everything around them.</p>
+        <p>Bring your own, use ours, or combine both.</p>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-solid" href="../#waitlist">Join the waitlist</a>
+      </div>
+    </div>
+    <div class="systems-art">
+      <div class="art-panel">
+        <div class="art-inner">
+          <!-- Illustrative only: System 2 agent loop sitting above System 1 models in the bid stream. -->
+          <svg viewBox="0 0 520 440" role="img" aria-label="Diagram: an always-on agent (System 2) managing models that decide inside the bid stream (System 1)">
+            <g font-family="DM Mono, ui-monospace, monospace" font-size="10" letter-spacing="1">
+              <!-- System 2 loop -->
+              <ellipse cx="260" cy="120" rx="150" ry="58" fill="#e3dcfb" fill-opacity=".85" stroke="#3b6fd8" stroke-width="1.2"/>
+              <ellipse cx="260" cy="120" rx="112" ry="40" fill="none" stroke="#3b6fd8" stroke-dasharray="3 4"/>
+              <circle cx="260" cy="120" r="16" fill="#3b6fd8"/>
+              <path d="M253 120h14M260 113v14" stroke="#fff" stroke-width="1.6"/>
+              <g fill="#fbfaf8" stroke="#1e1b19">
+                <circle cx="148" cy="120" r="5"/><circle cx="372" cy="120" r="5"/>
+                <circle cx="260" cy="80" r="5"/><circle cx="260" cy="160" r="5"/>
+              </g>
+              <rect x="22" y="40" width="152" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/>
+              <text x="34" y="57" fill="#1e1b19">SYSTEM 2 · AGENT</text>
+              <path d="M174 53h20l18 26" stroke="#1e1b19" fill="none" stroke-dasharray="2 3"/>
+              <!-- Control links -->
+              <g stroke="#1e1b19" stroke-width="1.1" fill="none" class="flow">
+                <path d="M190 160 190 262"/><path d="M260 178 260 262"/><path d="M330 160 330 262"/>
+              </g>
+              <!-- Bid stream lane -->
+              <path d="M30 290 490 290 490 350 30 350Z" fill="#fbfaf8" stroke="#3b6fd8" stroke-width="1.2"/>
+              <g stroke="#3b6fd8" stroke-width=".8">
+                <rect x="166" y="270" width="48" height="100" rx="3" fill="#d9e6fb"/>
+                <rect x="236" y="270" width="48" height="100" rx="3" fill="#f6dfb3"/>
+                <rect x="306" y="270" width="48" height="100" rx="3" fill="#d5f0e1"/>
+              </g>
+              <g fill="#1e1b19">
+                <circle cx="56" cy="320" r="4"/><circle cx="92" cy="320" r="4"/><circle cx="128" cy="320" r="4"/>
+                <circle cx="392" cy="320" r="4"/><circle cx="428" cy="320" r="4"/><circle cx="464" cy="320" r="4" fill-opacity=".35"/>
+              </g>
+              <path d="M30 320H490" stroke="#1e1b19" stroke-width="1" class="flow" fill="none"/>
+              <rect x="22" y="386" width="172" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/>
+              <text x="34" y="403" fill="#1e1b19">SYSTEM 1 · BID STREAM</text>
+              <rect x="372" y="386" width="124" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/>
+              <text x="384" y="403" fill="#1e1b19">MILLISECONDS</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame" id="systems">
+    <div class="section-head">
+      <span class="side-index">( 01 / 12 )</span>
+      <span class="chip"><i></i>Architecture</span>
+      <h2>Two systems. <span class="hl hl-blue">Different jobs.</span></h2>
+      <p class="lede">Media buying needs two very different kinds of intelligence.</p>
+    </div>
+    <div class="systems" style="border-top:1px solid var(--line)">
+      <article class="system">
+        <span class="label"><b>System 1</b></span>
+        <h3>Fast decisions, inside the bid stream.</h3>
+        <div class="prose">
+          <p class="lead">Every impression requires a decision in milliseconds.</p>
+          <p>System 1 models run directly in the buying path and answer questions like:</p>
+        </div>
+        <ol class="q-list">
+          <li><span>01</span>Is this impression valuable?</li>
+          <li><span>02</span>How likely is it to convert?</li>
+          <li><span>03</span>What is it worth?</li>
+          <li><span>04</span>Is this inventory high quality?</li>
+          <li><span>05</span>How much should we bid?</li>
+          <li><span>06</span>Should we bid at all?</li>
+        </ol>
+        <div class="prose" style="margin:28px 0 0">
+          <p>These models are small, fast and purpose-built.</p>
+          <p>They do not need to reason about an entire campaign. They need to make one decision extremely well.</p>
+        </div>
+      </article>
+      <article class="system">
+        <span class="label"><b>System 2</b></span>
+        <h3>An always-on agent managing the campaign.</h3>
+        <div class="prose">
+          <p class="lead">Campaign management happens over minutes, hours, days and weeks.</p>
+          <p>System 2 is a persistent agent that stays with the campaign throughout its life.</p>
+          <p>It can:</p>
+        </div>
+        <ul class="check-list">
+          <li>monitor performance</li>
+          <li>investigate changes</li>
+          <li>adjust budgets</li>
+          <li>launch experiments</li>
+          <li>compare models</li>
+          <li>retrain models</li>
+          <li>change targeting</li>
+          <li>diagnose underdelivery</li>
+          <li>review supply</li>
+          <li>generate reports</li>
+          <li>ask for approval when required</li>
+        </ul>
+        <div class="prose" style="margin:28px 0 0">
+          <p>Use the agent built into the platform, or bring your own.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame block" id="agents">
+    <div class="block-head">
+      <span class="side-index">( 02 / 12 )</span>
+      <span class="chip"><i style="background:var(--hl-violet)"></i>Agents</span>
+      <h2>Manage campaigns from Claude or ChatGPT.</h2>
+    </div>
+    <div class="block-body prose">
+      <p class="lead">The entire media platform is an API.</p>
+      <p>Agents are native operators.</p>
+      <p>You should not need to live inside another adtech dashboard just to manage a campaign.</p>
+      <p>Connect your own Claude, ChatGPT or agent environment and tell it what you want.</p>
+      <div class="prompts">
+        <p>For example:</p>
+        <div class="prompt">
+          <div class="prompt-bar"><i></i>Instruction</div>
+          <blockquote>
+            <span>Check this campaign every weekday morning.</span>
+            <span>If CPA moves more than 15%, investigate why.</span>
+            <span>Make small budget adjustments automatically.</span>
+            <span>Ask me before changing models or increasing total spend.</span>
+          </blockquote>
+        </div>
+        <p>Or:</p>
+        <div class="prompt">
+          <div class="prompt-bar"><i style="background:var(--hl-violet)"></i>Instruction</div>
+          <blockquote>
+            <span>Test the new store-visit model against the current model.</span>
+            <span>Keep 80% of spend on the existing model.</span>
+            <span>Move more traffic only if the new model performs better.</span>
+          </blockquote>
+        </div>
+      </div>
+      <p style="margin-top:28px">Schedules, guardrails and approvals remain explicit.</p>
+      <p><strong>The agent keeps running even when you are not talking to it.</strong></p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame block" id="models">
+    <div class="block-head">
+      <span class="side-index">( 03 / 12 )</span>
+      <span class="chip"><i style="background:var(--hl-blue)"></i>Models</span>
+      <h2>Open AdTech System One Models</h2>
+    </div>
+    <div class="block-body prose">
+      <p class="lead">We are building an open family of models specifically for media decisioning.</p>
+      <p>Think of it as the beginnings of a <strong>Hugging Face or PyTorch ecosystem for programmatic decisioning.</strong></p>
+      <ol class="steps">
+        <li>Start with an open model.</li>
+        <li>Train it on your own data.</li>
+        <li>Fine-tune it.</li>
+        <li>Evaluate it.</li>
+        <li>Deploy it directly into the bid stream.</li>
+      </ol>
+      <p style="margin-top:28px">Initial model families include:</p>
+      <ul class="tag-list" style="margin-top:14px">
+        <li>conversion propensity</li>
+        <li>click propensity</li>
+        <li>attention</li>
+        <li>inventory quality</li>
+        <li>contextual relevance</li>
+        <li>store visits</li>
+        <li>bid pricing</li>
+        <li>win probability</li>
+        <li>incremental lift</li>
+        <li>carbon efficiency</li>
+      </ul>
+      <p style="margin-top:28px">Every model comes with the code, training recipe, evaluation approach and deployment format needed to actually use it.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame block" id="training">
+    <div class="block-head">
+      <span class="side-index">( 04 / 12 )</span>
+      <span class="chip"><i style="background:var(--hl-green)"></i>Training</span>
+      <h2>Train and fine-tune on your own data.</h2>
+    </div>
+    <div class="block-body prose">
+      <p class="lead">Open models are only the starting point.</p>
+      <p>Use the platform to train or fine-tune them against your own campaign and outcome data.</p>
+      <p>The workflow is designed to cover the full model lifecycle:</p>
+      <ol class="pipeline" aria-label="Data → train → evaluate → replay → shadow → deploy → monitor">
+        <li><small>01</small>Data</li>
+        <li><small>02</small>train</li>
+        <li><small>03</small>evaluate</li>
+        <li class="hot"><small>04</small>replay</li>
+        <li class="hot"><small>05</small>shadow</li>
+        <li><small>06</small>deploy</li>
+        <li><small>07</small>monitor</li>
+      </ol>
+      <p>You can compare models against historical auctions before putting spend behind them.</p>
+      <ol class="steps">
+        <li>Then run them in shadow mode.</li>
+        <li>Then send a small percentage of traffic.</li>
+        <li>Then scale.</li>
+      </ol>
+      <p style="margin-top:28px"><strong>Your data and trained models remain yours.</strong></p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame block" id="composable">
+    <div class="block-head">
+      <span class="side-index">( 05 / 12 )</span>
+      <span class="chip"><i style="background:var(--hl-amber)"></i>Composition</span>
+      <h2>Models are composable.</h2>
+    </div>
+    <div class="block-body prose">
+      <p class="lead">There should not be one universal media algorithm.</p>
+      <p>Different models can contribute different pieces of the decision.</p>
+      <p>For example:</p>
+      <div class="equation stack" aria-label="Attention model × Conversion model × Inventory quality model × Price model = Bid decision">
+        <span class="term t-violet">Attention model</span>
+        <span class="op">×</span>
+        <span class="term t-blue">Conversion model</span>
+        <span class="op">×</span>
+        <span class="term t-green">Inventory quality model</span>
+        <span class="op">×</span>
+        <span class="term t-amber">Price model</span>
+        <span class="op">=</span>
+        <span class="term result">Bid decision</span>
+      </div>
+      <p>Different participants can contribute different models.</p>
+      <p>A model might belong to:</p>
+      <ul class="tag-list" style="margin-top:14px">
+        <li>an advertiser</li>
+        <li>an agency</li>
+        <li>a publisher</li>
+        <li>a data provider</li>
+        <li>an independent developer</li>
+        <li>the open-source community</li>
+      </ul>
+      <p style="margin-top:28px">The platform provides a common way to run them together.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame block" id="marketplace">
+    <div class="block-head">
+      <span class="side-index">( 06 / 12 )</span>
+      <span class="chip"><i></i>Marketplace</span>
+      <h2>A marketplace for media intelligence</h2>
+    </div>
+    <div class="block-body prose">
+      <p class="lead">Models are portable assets.</p>
+      <div class="cards">
+        <div><span class="label">Agency</span>An agency can build a model and use it across its clients.</div>
+        <div><span class="label">Advertiser</span>An advertiser can keep a proprietary model private.</div>
+        <div><span class="label">Publisher</span>A publisher can expose a model describing its inventory.</div>
+        <div><span class="label">Developer</span>A developer can release an open-source model.</div>
+        <div><span class="label">Specialist</span>A specialist can charge for access to one.</div>
+      </div>
+      <p>The platform handles how those models are discovered, combined, evaluated and executed.</p>
+      <p><strong>The intelligence belongs to whoever created it.</strong></p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame block" id="auction">
+    <div class="block-head">
+      <span class="side-index">( 07 / 12 )</span>
+      <span class="chip"><i style="background:var(--hl-green)"></i>Open source</span>
+      <h2>Open auction infrastructure</h2>
+    </div>
+    <div class="block-body prose">
+      <p class="lead">The core auction server is open source.</p>
+      <ul class="no-list">
+        <li>No hidden bidder.</li>
+        <li>No private decisioning layer.</li>
+        <li>No requirement to trust us about what happened in the auction.</li>
+      </ul>
+      <p>Developers can inspect the code, run it themselves, contribute to it or build their own infrastructure around it.</p>
+      <p><strong>Our managed platform runs the same open core.</strong></p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame block" id="containers">
+    <div class="block-head">
+      <span class="side-index">( 08 / 12 )</span>
+      <span class="chip"><i style="background:var(--hl-blue)"></i>Deployment</span>
+      <h2>Containers are the deployment unit.</h2>
+    </div>
+    <div class="block-body prose">
+      <p class="lead">Buying logic should be portable.</p>
+      <p>A model or bidder can run close to the auction rather than every opportunity travelling through layers of external infrastructure.</p>
+      <p>The same workload can move between supported execution environments without being rewritten.</p>
+      <p><strong>Containers make that possible.</strong></p>
+      <p>They also make ownership clear: your logic is an actual deployable piece of software, not a setting hidden inside someone else's platform.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame block" id="logs">
+    <div class="block-head">
+      <span class="side-index">( 09 / 12 )</span>
+      <span class="chip"><i style="background:var(--hl-amber)"></i>Logs</span>
+      <h2>All your logs. <span class="hl hl-amber">No logging tax.</span></h2>
+    </div>
+    <div class="block-body prose">
+      <p class="lead">Every decision should be inspectable.</p>
+      <p>You get access to:</p>
+      <ul class="check-list" style="margin-top:14px">
+        <li>auction opportunities</li>
+        <li>features used</li>
+        <li>model versions</li>
+        <li>model scores</li>
+        <li>bid decisions</li>
+        <li>clearing prices</li>
+        <li>wins and losses</li>
+        <li>campaign changes</li>
+        <li>agent actions</li>
+        <li>experiments</li>
+        <li>outcomes</li>
+      </ul>
+      <p style="margin-top:28px"><strong>The logs are yours.</strong></p>
+      <p>There is no additional fee to access your own event history or export it elsewhere.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame block" id="efficiency">
+    <div class="block-head">
+      <span class="side-index">( 10 / 12 )</span>
+      <span class="chip"><i style="background:var(--hl-green)"></i>Efficiency</span>
+      <h2>Efficient by design</h2>
+    </div>
+    <div class="block-body prose">
+      <p class="lead">Programmatic infrastructure processes enormous volumes of data.</p>
+      <p>That makes efficiency matter.</p>
+      <p>We want the real-time path to do as little unnecessary work as possible.</p>
+      <div class="equation" aria-label="Waste less compute → lower cost → lower latency → lower carbon">
+        <span class="term">Waste less compute</span>
+        <span class="op">→</span>
+        <span class="term t-blue">lower cost</span>
+        <span class="op">→</span>
+        <span class="term t-violet">lower latency</span>
+        <span class="op">→</span>
+        <span class="term t-green">lower carbon</span>
+      </div>
+      <p>Those goals reinforce each other.</p>
+      <p>The core execution layer is designed around that principle from the beginning.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame block" id="supply">
+    <div class="block-head">
+      <span class="side-index">( 11 / 12 )</span>
+      <span class="chip"><i></i>Supply</span>
+      <h2>Direct publisher supply</h2>
+    </div>
+    <div class="block-body prose">
+      <p class="lead">We want a clear path between buyer and publisher.</p>
+      <p>That does not mean every publisher must integrate directly with us.</p>
+      <p>It means avoiding unnecessary hops, reselling and duplication wherever possible.</p>
+      <p><strong>Every impression should have understandable provenance.</strong></p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame block" id="developers">
+    <div class="block-head">
+      <span class="side-index">( 12 / 12 )</span>
+      <span class="chip"><i style="background:var(--hl-violet)"></i>Developers</span>
+      <h2>Built for developers too</h2>
+    </div>
+    <div class="block-body prose">
+      <p class="lead">For developers, one way to think about the platform is:</p>
+      <div class="equation stack" aria-label="Cloudflare Workers for RTB + Hugging Face for buying models + an agentic control plane">
+        <span class="term t-amber">Cloudflare Workers for RTB</span>
+        <span class="op">+</span>
+        <span class="term t-blue">Hugging Face for buying models</span>
+        <span class="op">+</span>
+        <span class="term t-violet">an agentic control plane</span>
+      </div>
+      <p>A fast execution environment.</p>
+      <p>An open model ecosystem.</p>
+      <p>And an always-on system capable of operating campaigns on top.</p>
+    </div>
+  </section>
+</main>
+
+<section class="dark">
+  <div class="frame closing">
+    <span class="label">( Open source )</span>
+    <h2 style="margin-top:28px">Open from <span class="hl hl-blue" style="color:var(--ink)">the beginning.</span></h2>
+    <ul class="open-lines">
+      <li>The bidder is open.</li>
+      <li>The models are open.</li>
+      <li>The APIs are open.</li>
+      <li>The documentation is open.</li>
+      <li>Anyone can sign up.</li>
+    </ul>
+    <p>The aim is not to build another closed media platform.</p>
+    <p>It is to create infrastructure that agencies, advertisers, publishers and developers can build their own media systems on top of.</p>
+    <a class="btn" href="../#waitlist">Join the waitlist</a>
+  </div>
+  <footer>
+    <div class="frame foot">
+      <a class="brand" href="../">counter</a>
+      <span class="label">© 2026 Counter</span>
+    </div>
+  </footer>
+</section>
+
+</body>
+</html>
