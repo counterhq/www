@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Counter — Own how your media is bought</title>
-  <meta name="description" content="An open platform for agencies and brands to run their own buying logic directly against publisher supply.">
+  <meta name="description" content="An open platform connecting agencies, brands and publishers directly.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
@@ -23,8 +23,8 @@
     </a>
     <nav class="nav-links" aria-label="Primary">
       <a href="platform/">Platform</a>
-      <a href="#why">Why</a>
-      <a href="#open">Open</a>
+      <a href="blog/">Blog</a>
+      <a href="https://docs.counterhq.co" target="_blank" rel="noopener">Docs<svg class="ext" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 1.5h5.5V7M8.5 1.5 1.5 8.5"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
       <a href="#faq">FAQ</a>
     </nav>
     <a class="btn" href="#waitlist">Join the waitlist</a>
@@ -36,9 +36,9 @@
     <div class="hero-copy">
       <div class="hero-text">
         <h1>Own how your media is bought.</h1>
-        <p>An open platform for agencies and brands to run their own buying logic directly against publisher supply.</p>
-        <p>The bidder is open. The models are open. The docs are open. Anyone can get started.</p>
-        <p>Bring your own data, models and agents — or start with ours.</p>
+        <p>An open platform connecting agencies, brands and publishers directly.</p>
+        <p>Bring your own buying logic, models and agents. Publishers make supply and signals available without giving up control to another black box.</p>
+        <p>The bidder is open. The auction server is open. The models are open. The docs are open.</p>
       </div>
       <div class="hero-cta">
         <a class="btn btn-solid" href="#waitlist">Join the waitlist</a>
@@ -48,8 +48,8 @@
     <div class="hero-art">
       <div class="art-panel">
         <div class="art-inner">
-          <!-- Illustrative only: buyer logic layer sitting over direct paths to publisher supply. -->
-          <svg viewBox="0 0 520 560" role="img" aria-label="Diagram: your buying logic as a layer connected by direct paths to publisher supply">
+          <!-- Illustrative only: advertiser, agency, open and publisher models composed on Counter's open execution layer above publisher supply. -->
+          <svg viewBox="0 0 520 610" role="img" aria-label="Diagram: advertisers and agencies bring objectives and models, publishers bring supply and signals, and open models sit alongside them on Counter's open execution layer">
             <defs>
               <linearGradient id="slab" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#e9f0fc" stop-opacity=".95"/>
@@ -57,54 +57,57 @@
               </linearGradient>
             </defs>
             <g font-family="DM Mono, ui-monospace, monospace" font-size="10" letter-spacing="1">
-              <!-- Publisher sheets -->
+              <!-- Publisher supply -->
               <g stroke="#3b6fd8" stroke-width="1" fill="#fbfaf8">
-                <path d="M260 372 450 462 260 552 70 462Z" opacity=".55"/>
-                <path d="M260 360 450 450 260 540 70 450Z" opacity=".8"/>
-                <path d="M260 348 450 438 260 528 70 438Z"/>
+                <path d="M260 432 435 514l-175 82L85 514Z" opacity=".55"/>
+                <path d="M260 420 435 502l-175 82L85 502Z" opacity=".8"/>
+                <path d="M260 408 435 490l-175 82L85 490Z"/>
               </g>
-              <!-- Publisher tiles on the top sheet -->
               <g stroke="#3b6fd8" stroke-width=".8">
-                <path d="M170 420 210 401 250 420 210 439Z" fill="#f6dfb3"/>
-                <path d="M270 420 310 401 350 420 310 439Z" fill="#e3dcfb"/>
-                <path d="M220 452 260 433 300 452 260 471Z" fill="#d5f0e1"/>
-                <path d="M120 446 160 427 200 446 160 465Z" fill="#d9e6fb"/>
-                <path d="M320 446 360 427 400 446 360 465Z" fill="#d9e6fb"/>
+                <path d="M175 474 209 490l-34 16L141 490Z" fill="#d9e6fb"/>
+                <path d="M260 434 294 450l-34 16L226 450Z" fill="#e3dcfb"/>
+                <path d="M345 474 379 490l-34 16L311 490Z" fill="#d5f0e1"/>
               </g>
-              <!-- Direct paths -->
+              <path d="M240 528v10l20 10 20 -10v-10" fill="#dcb871"/><path d="M260 518 280 528l-20 10L240 528Z" fill="#f6dfb3" stroke="#1e1b19" stroke-width=".8"/>
+              <!-- Buyer side: advertiser and agency -->
+              <path d="M85 100v10l80 38 80 -38v-10" fill="#bcd0f2" fill-opacity=".8" stroke="#3b6fd8"/>
+              <path d="M165 62 245 100l-80 38L85 100Z" fill="#eef3fd" stroke="#3b6fd8" stroke-width="1.1"/>
+              <path d="M275 100v10l80 38 80 -38v-10" fill="#cfc4f4" fill-opacity=".8" stroke="#3b6fd8"/>
+              <path d="M355 62 435 100l-80 38L275 100Z" fill="#f2effd" stroke="#3b6fd8" stroke-width="1.1"/>
+              <path d="M143 98v11l22 11 22 -11v-11" fill="#a9c0ea"/><path d="M165 87 187 98l-22 11L143 98Z" fill="#d9e6fb" stroke="#1e1b19" stroke-width=".8"/>
+              <path d="M333 98v11l22 11 22 -11v-11" fill="#bcaeef"/><path d="M355 87 377 98l-22 11L333 98Z" fill="#e3dcfb" stroke="#1e1b19" stroke-width=".8"/>
+              <!-- Flows: buyers into Counter, Counter into supply -->
               <g stroke="#1e1b19" stroke-width="1.1" fill="none" class="flow">
-                <path d="M210 230 210 420"/>
-                <path d="M310 230 310 420"/>
-                <path d="M260 250 260 452"/>
-                <path d="M160 205 160 446"/>
-                <path d="M360 205 360 446"/>
+                <path d="M165 148 165 252"/><path d="M355 148 355 252"/>
+                <path d="M175 354 175 490"/><path d="M345 354 345 490"/><path d="M260 394 260 450"/>
               </g>
+              <!-- Publisher signals up into Counter -->
+              <path d="M300 520 300 375" stroke="#b8862a" stroke-width="1.3" fill="none" class="flow"/>
               <g fill="#1e1b19">
-                <circle cx="210" cy="420" r="3"/><circle cx="310" cy="420" r="3"/>
-                <circle cx="260" cy="452" r="3"/><circle cx="160" cy="446" r="3"/><circle cx="360" cy="446" r="3"/>
+                <circle cx="175" cy="490" r="3"/><circle cx="345" cy="490" r="3"/><circle cx="260" cy="450" r="3"/>
               </g>
-              <!-- Buyer logic slab -->
-              <path d="M260 90 450 180 260 270 70 180Z" fill="url(#slab)" stroke="#3b6fd8" stroke-width="1.2"/>
-              <path d="M70 180v26l190 90 190-90v-26" fill="#bcd0f2" fill-opacity=".7" stroke="#3b6fd8" stroke-width="1.2"/>
-              <path d="M260 270v26" stroke="#3b6fd8" stroke-width="1.2"/>
-              <path d="M260 116 396 180 260 244 124 180Z" fill="none" stroke="#3b6fd8" stroke-dasharray="3 4"/>
-              <!-- Model block on slab -->
-              <path d="M260 150 300 169 260 188 220 169Z" fill="#3b6fd8"/>
-              <path d="M220 169v12l40 19 40-19v-12" fill="#2c58b4"/>
-              <path d="M248 166 272 166M248 172 266 172" stroke="#fff" stroke-width="1.6" transform="skewY(0)"/>
+              <!-- Counter: open execution layer -->
+              <path d="M260 208 435 290l-175 82L85 290Z" fill="url(#slab)" stroke="#3b6fd8" stroke-width="1.2"/>
+              <path d="M85 290v22l175 82 175 -82v-22" fill="#bcd0f2" fill-opacity=".7" stroke="#3b6fd8" stroke-width="1.2"/>
+              <path d="M260 372v22" stroke="#3b6fd8" stroke-width="1.2"/>
+              <path d="M260 229 390 290l-130 61L130 290Z" fill="none" stroke="#3b6fd8" stroke-dasharray="3 4"/>
+              <path d="M238 262v11l22 11 22 -11v-11" fill="#9fd2b5"/><path d="M260 251 282 262l-22 11L238 262Z" fill="#d5f0e1" stroke="#1e1b19" stroke-width=".8"/>
+              <path d="M183 290v11l22 11 22 -11v-11" fill="#a9c0ea"/><path d="M205 279 227 290l-22 11L183 290Z" fill="#d9e6fb" stroke="#1e1b19" stroke-width=".8"/>
+              <path d="M293 290v11l22 11 22 -11v-11" fill="#bcaeef"/><path d="M315 279 337 290l-22 11L293 290Z" fill="#e3dcfb" stroke="#1e1b19" stroke-width=".8"/>
+              <path d="M238 318v11l22 11 22 -11v-11" fill="#dcb871"/><path d="M260 307 282 318l-22 11L238 318Z" fill="#f6dfb3" stroke="#1e1b19" stroke-width=".8"/>
               <!-- Tags -->
               <g>
-                <rect x="352" y="96" width="132" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/>
-                <text x="364" y="113" fill="#1e1b19">YOUR MODELS</text>
-                <path d="M352 109H330l-24 40" stroke="#1e1b19" fill="none" stroke-dasharray="2 3"/>
-                <rect x="28" y="96" width="132" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/>
-                <text x="40" y="113" fill="#1e1b19">YOUR RULES</text>
-                <path d="M160 109h22l30 46" stroke="#1e1b19" fill="none" stroke-dasharray="2 3"/>
-                <rect x="372" y="300" width="124" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/>
-                <text x="384" y="317" fill="#1e1b19">DIRECT PATH</text>
-                <path d="M372 313h-12" stroke="#1e1b19"/>
-                <rect x="24" y="500" width="112" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/>
-                <text x="36" y="517" fill="#1e1b19">PUBLISHERS</text>
+                <rect x="16" y="18" width="124" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/><rect x="26" y="27" width="8" height="8" rx="1.5" fill="#d9e6fb" stroke="#1e1b19" stroke-width=".6"/><text x="42" y="35" fill="#1e1b19">ADVERTISER</text>
+                <path d="M78 44v18l14 20" stroke="#1e1b19" fill="none" stroke-dasharray="2 3"/>
+                <rect x="392" y="18" width="108" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/><rect x="402" y="27" width="8" height="8" rx="1.5" fill="#e3dcfb" stroke="#1e1b19" stroke-width=".6"/><text x="418" y="35" fill="#1e1b19">AGENCY</text>
+                <path d="M446 44v18l-14 20" stroke="#1e1b19" fill="none" stroke-dasharray="2 3"/>
+                <rect x="172" y="166" width="176" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/><text x="186" y="183" fill="#1e1b19">COUNTER · OPEN LAYER</text>
+                <path d="M260 192v14" stroke="#1e1b19" stroke-dasharray="2 3"/>
+                <rect x="392" y="196" width="124" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/><rect x="402" y="205" width="8" height="8" rx="1.5" fill="#d5f0e1" stroke="#1e1b19" stroke-width=".6"/><text x="418" y="213" fill="#1e1b19">OPEN MODELS</text>
+                <path d="M392 209h-40l-66 46" stroke="#1e1b19" fill="none" stroke-dasharray="2 3"/>
+                <rect x="392" y="404" width="112" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/><rect x="402" y="413" width="8" height="8" rx="1.5" fill="#f6dfb3" stroke="#1e1b19" stroke-width=".6"/><text x="418" y="421" fill="#1e1b19">SIGNALS</text>
+                <path d="M392 417h-88" stroke="#1e1b19" fill="none" stroke-dasharray="2 3"/>
+                <rect x="16" y="566" width="124" height="26" rx="3" fill="#fbfaf8" stroke="#1e1b19"/><rect x="26" y="575" width="8" height="8" rx="1.5" fill="#f6dfb3" stroke="#1e1b19" stroke-width=".6"/><text x="42" y="583" fill="#1e1b19">PUBLISHERS</text>
               </g>
             </g>
           </svg>
@@ -119,9 +122,35 @@
     <div class="section-head">
       <span class="side-index">( 01 / 03 )</span>
       <span class="chip"><i></i>Why</span>
-      <h2>Programmatic should be <span class="hl hl-blue">open.</span> <span class="muted">Today, much of the intelligence behind media buying sits inside platforms you cannot see, change or own.</span></h2>
+      <h2>Programmatic should be <span class="hl hl-blue">open.</span> <span class="muted">Today, buyers and publishers both give up too much control to the platforms between them.</span></h2>
       <p class="lede">We want to change that.</p>
     </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="frame pillars audiences" id="who" aria-label="Who it is for">
+    <article class="pillar">
+      <div class="num">[01]</div>
+      <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="5.5"/><circle cx="8" cy="8" r="2"/></svg></div>
+      <h3>For brands</h3>
+      <p>Own the logic that decides where your money goes.</p>
+      <p>Bring your data and models, understand every decision, and keep the intelligence you build.</p>
+    </article>
+    <article class="pillar">
+      <div class="num">[02]</div>
+      <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 2 14 5 8 8 2 5Z"/><path d="M2 8l6 3 6-3M2 11l6 3 6-3"/></svg></div>
+      <h3>For agencies</h3>
+      <p>Build differentiated buying strategies rather than operating someone else's algorithm.</p>
+      <p>Create your own models, agents and commercial products and use them across clients.</p>
+    </article>
+    <article class="pillar pub">
+      <div class="num">[03]</div>
+      <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="2" width="10" height="12" rx="1"/><path d="M5.5 5.5h5M5.5 8h5M5.5 10.5h3"/></svg></div>
+      <h3>For publishers</h3>
+      <p>Make your inventory available through a clear, direct path to buyers.</p>
+      <p>Control how your supply is exposed, contribute your own signals and models, and remove unnecessary intermediaries between you and demand.</p>
+    </article>
   </section>
 
   <div class="rule"></div>
@@ -131,40 +160,48 @@
       <div class="num">[01]</div>
       <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 4 1.5 8 5 12M11 4l3.5 4L11 12M9.5 2.5l-3 11"/></svg></div>
       <h3>Open infrastructure</h3>
-      <p>The core auction server is open source.</p>
-      <p>Inspect it. Run it yourself. Extend it. Build on top of it.</p>
+      <p>The core auction and bidding infrastructure is open source.</p>
+      <p>Publishers can inspect it, run it themselves or use the managed platform.</p>
+      <p>Buyers can inspect exactly how their decisions are executed.</p>
+      <p>Nobody needs to trust a closed black box.</p>
     </article>
     <article class="pillar">
       <div class="num">[02]</div>
       <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="4" cy="4" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="8" cy="12" r="2"/><path d="M4 6v1.5L8 10M12 6v1.5L8 10"/></svg></div>
       <h3>Open models</h3>
       <p>Start with open models for common media decisioning problems, then train or fine-tune them on your own data.</p>
-      <p>Your models remain yours.</p>
+      <p>Models can come from advertisers, agencies, publishers or independent developers.</p>
+      <p>The intelligence belongs to whoever creates it.</p>
     </article>
     <article class="pillar">
       <div class="num">[03]</div>
       <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2.5" y="4" width="11" height="9" rx="2"/><path d="M8 1.5V4M6 8.5h.01M10 8.5h.01"/></svg></div>
       <h3>Your agents</h3>
       <p>Use our always-on campaign agent or bring your own.</p>
-      <p>Manage campaigns from the tools you already use, including Claude and ChatGPT.</p>
+      <p>Manage campaigns from Claude, ChatGPT or another agent while Counter handles the persistent execution underneath.</p>
     </article>
     <article class="pillar">
       <div class="num">[04]</div>
       <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2 8h12M10 4l4 4-4 4"/></svg></div>
-      <h3>Direct supply</h3>
-      <p>Buy through clear paths to publishers, without unnecessary layers or reselling.</p>
+      <h3>Direct connections</h3>
+      <p>Create a clearer path between buyer and publisher.</p>
+      <p>Counter can work through existing infrastructure where necessary, but the goal is simple: fewer unnecessary hops, less reselling and understandable provenance for every impression.</p>
     </article>
     <article class="pillar">
       <div class="num">[05]</div>
       <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="9" width="3" height="5"/><rect x="6.5" y="5" width="3" height="9"/><rect x="11" y="2" width="3" height="12"/></svg></div>
       <h3>Clear economics</h3>
-      <p>See what the media costs, what the technology costs and where margin is being made.</p>
+      <p>Everyone should understand how money moves.</p>
+      <p>Advertisers can see what they are paying for.</p>
+      <p>Agencies can create explicit technology, optimisation and model fees.</p>
+      <p>Publishers can understand the route demand takes to their inventory.</p>
     </article>
     <article class="pillar">
       <div class="num">[06]</div>
       <div class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M13.5 2.5C6 2.5 2.5 6 2.5 13.5 10 13.5 13.5 10 13.5 2.5ZM2.5 13.5 9 7"/></svg></div>
       <h3>Built for efficiency</h3>
-      <p>Less unnecessary compute means lower infrastructure cost, lower latency and lower carbon.</p>
+      <p>Programmatic processes enormous volumes of data.</p>
+      <p>Waste less compute → lower cost → lower latency → lower carbon.</p>
     </article>
   </section>
 
@@ -177,13 +214,14 @@
       <h2>Built in <span class="hl hl-violet">the open.</span></h2>
     </div>
     <ul class="open-list" style="margin:0;padding:0">
-      <li><span>[A]</span>Open bidder.</li>
-      <li><span>[B]</span>Open models.</li>
-      <li><span>[C]</span>Open APIs.</li>
-      <li><span>[D]</span>Open docs.</li>
+      <li><span>[A]</span>Open auction server.</li>
+      <li><span>[B]</span>Open bidder.</li>
+      <li><span>[C]</span>Open models.</li>
+      <li><span>[D]</span>Open APIs.</li>
+      <li><span>[E]</span>Open docs.</li>
     </ul>
     <div class="open-foot">
-      <p>No private sales process required to get started.</p>
+      <p>For advertisers, agencies, publishers and developers.</p>
       <p>Anyone can sign up, experiment and build.</p>
       <a class="btn btn-solid" href="#waitlist">Join the waitlist</a>
     </div>
@@ -203,7 +241,7 @@
         <summary><span class="q-num">01</span>What are you building?<span class="plus"></span></summary>
         <div class="answer">
           <p>An open execution platform for programmatic media.</p>
-          <p>Bring your own models and agents, run them directly against publisher supply, and own the decisions between campaign objective and impression.</p>
+          <p>Buyers bring their own models and agents. Publishers bring their supply, signals and rules. Counter connects both sides directly and gives them an open place to execute.</p>
         </div>
       </details>
       <details>
