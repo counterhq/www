@@ -66,10 +66,14 @@ p { margin: 0; }
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2);
 }
 .chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-soft); }
-.hl { padding: 0 0.12em; border-radius: 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-.hl-blue { background: var(--hl-blue); }
-.hl-violet { background: var(--hl-violet); }
-.hl-amber { background: var(--hl-amber); }
+.hl {
+  padding: 0 0.12em; border-radius: 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  /* Trim the top of the highlight so a wrapped line's band never covers descenders on the line above. */
+  background: linear-gradient(var(--hl-c), var(--hl-c)) 0 100% / 100% calc(100% - 0.16em) no-repeat;
+}
+.hl-blue { --hl-c: var(--hl-blue); }
+.hl-violet { --hl-c: var(--hl-violet); }
+.hl-amber { --hl-c: var(--hl-amber); }
 .muted { color: var(--ink-3); }
 
 .btn {
@@ -506,3 +510,26 @@ footer { border-top: 1px solid var(--dark-line); }
 .blog-post pre { overflow-x: auto; padding: 20px; background: var(--bg-raised); border: 1px solid var(--line); }
 .blog-post img { max-width: 100%; height: auto; }
 .blog-list article { padding: 32px 0; border-bottom: 1px solid var(--line); }
+
+/* Landing page: problems, audiences, open-by-design */
+.hl-green { --hl-c: var(--hl-green); }
+.section-head .lede + .lede { margin-top: 12px; }
+.section-head .tag-list { margin-top: 32px; }
+.pillar .q-list { margin: 14px 0 16px; }
+.pillar .q-list li { color: var(--ink); }
+.prose .check-list { margin-top: 24px; }
+.prose .tagline { font-size: clamp(22px, 2.4vw, 26px); line-height: 1.25; letter-spacing: -0.02em; color: var(--ink); margin-top: 32px; }
+.prose .btn { margin-top: 12px; text-decoration: none; }
+.open-list.four { grid-template-columns: repeat(4, 1fr); }
+.open-list.three { grid-template-columns: repeat(3, 1fr); }
+.open-list.yours li { background: var(--bg-raised); }
+.waitlist p + p { margin-top: 12px; }
+.waitlist strong { color: #ece9e5; font-weight: 500; }
+@media (max-width: 960px) {
+  .open-list.four { grid-template-columns: 1fr 1fr; }
+  .open-list.four li:last-child { grid-column: auto; }
+  .open-list.three { grid-template-columns: 1fr; }
+  .open-list.three li { border-right: 0; }
+  .open-list.three li:last-child { border-bottom: 0; }
+  .open-list.four li:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+}
