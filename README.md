@@ -45,7 +45,7 @@ draft: true
 Your article goes here. MDX supports importing React components.
 ```
 
-Set `draft: false` to publish on the next deployment. Keep blog filenames flat; the filename is the URL slug. Drafts are excluded from routes, listings, and the sitemap. Fumadocs uses its own layouts, CSS, and providers, isolated from marketing pages. Add docs pages in `content/docs` with `title` and `description` frontmatter; add `meta.json` for sidebar ordering.
+Set `draft: false` to publish on the next deployment. Keep blog filenames flat; the filename is the URL slug. Drafts are excluded from routes, listings, and the sitemap. Fumadocs uses a separate root layout, CSS, and providers. Navigation between docs and marketing performs a full page load so documentation styles cannot leak into marketing pages. Add docs pages in `content/docs` with `title` and `description` frontmatter; add `meta.json` for sidebar ordering.
 
 ## Waitlist: Attio + Resend
 

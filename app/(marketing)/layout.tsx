@@ -1,4 +1,6 @@
 import './marketing.css';
+import SiteDocument from '@/components/site-document';
+export { metadata, viewport } from '@/components/site-document';
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return <SiteDocument>{children}</SiteDocument>;
 }

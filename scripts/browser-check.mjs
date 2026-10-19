@@ -25,6 +25,11 @@ await page.screenshot({path:'/tmp/counter-docs-desktop.png',fullPage:true});
 const search=await page.request.get(base+'/api/search?query=documentation');
 assert.equal(search.status(),200);
 assert.ok((await search.json()).length>0);
+await page.evaluate(() => { window.__docsNavigationMarker = true; });
+await page.locator('a[href="/platform/"]').first().click();
+await page.waitForURL('**/platform/');
+await page.waitForFunction(() => window.__docsNavigationMarker === undefined);
+await page.goto(base + '/docs/', { waitUntil: 'networkidle' });
 await page.setViewportSize({width:390,height:844});
 await page.reload({ waitUntil: 'networkidle' });
 await page.evaluate(() => document.fonts.ready);
@@ -39,4 +44,4 @@ assert.equal((await page.request.post(base+'/api/waitlist/',{data:{email:'test@e
 assert.equal((await page.request.post(base+'/api/waitlist/',{data:'x'.repeat(5000),headers:{'Content-Type':'application/json'}})).status(),413);
 assert.deepEqual(errors,[]);
 await browser.close();
-console.log('Browser checks passed: FAQ, form validation/error/success, docs, search, mobile overflow, 404s, API rejection cases.');
+console.log('Browser checks passed: FAQ, form validation/error/success, docs, search, docs-to-marketing isolation, mobile overflow, 404s, API rejection cases.');
