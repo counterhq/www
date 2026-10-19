@@ -1,6 +1,33 @@
 import { SiteHeader } from '@/components/site-header';
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata("Counter — The platform", "Open execution for programmatic media. Models make decisions in the bidstream. Always-on agents manage everything around them.", "/platform/");
+// Isometric cube in the hero's style: top, left and right faces, centred on the top face's middle.
+function Cube({ x, y, w = 13, h = 16, tones }: { x: number; y: number; w?: number; h?: number; tones: readonly [string, string, string] }) {
+  const [top, left, right] = tones;
+  const d = w / 2;
+  return (<g stroke="#1e1b19" strokeWidth="0.8" strokeLinejoin="round">
+    <path d={`M${x - w} ${y} ${x} ${y + d} ${x} ${y + d + h} ${x - w} ${y + h}Z`} fill={left} />
+    <path d={`M${x} ${y + d} ${x + w} ${y} ${x + w} ${y + h} ${x} ${y + d + h}Z`} fill={right} />
+    <path d={`M${x} ${y - d} ${x + w} ${y} ${x} ${y + d} ${x - w} ${y}Z`} fill={top} />
+  </g>);
+}
+// Hero-style label: a small swatch and mono caps text in an outlined tag, with an optional second line.
+function Tag({ x, y, w, swatch, label, sub, muted }: { x: number; y: number; w: number; swatch: string; label: string; sub?: string; muted?: boolean }) {
+  const ink = muted ? '#8a847f' : '#1e1b19';
+  return (<g>
+    <rect x={x} y={y} width={w} height={sub ? 42 : 26} rx={3} fill="#fbfaf8" stroke={ink} strokeDasharray={muted ? '3 2' : undefined} />
+    <rect x={x + 10} y={y + 9} width={8} height={8} rx="1.5" fill={swatch} stroke={ink} strokeWidth=".6" />
+    <text x={x + 26} y={y + 17} fill={ink}>{label}</text>
+    {sub && <text x={x + 26} y={y + 32} fill="#8a847f" fontSize={9} letterSpacing={.6}>{sub}</text>}
+  </g>);
+}
+// Isometric slab: a diamond top face over a shallow side, centred on the top face.
+function Slab({ x, y, hw, hh, t, top, side, stroke = '#3b6fd8', opacity }: { x: number; y: number; hw: number; hh: number; t: number; top: string; side: string; stroke?: string; opacity?: number }) {
+  return (<g opacity={opacity} strokeLinejoin="round">
+    <path d={`M${x - hw} ${y}v${t}l${hw} ${hh} ${hw} ${-hh}v${-t}`} fill={side} stroke={stroke} strokeWidth="1.1" />
+    <path d={`M${x} ${y - hh} ${x + hw} ${y} ${x} ${y + hh} ${x - hw} ${y}Z`} fill={top} stroke={stroke} strokeWidth="1.1" />
+  </g>);
+}
 export default function Page() { return (<><SiteHeader current="platform" />
   <main id="top">
     <section className="frame page-hero">
@@ -157,14 +184,35 @@ export default function Page() { return (<><SiteHeader current="platform" />
           <div className="prose" style={{margin: '28px 0 0'}}>
             <p>They are fast, predictable and built for one job.</p>
           </div>
-          <div className="equation" aria-label="Model → decision → bid">
-            <span className="term">Model</span>
-            <span className="op">→</span>
-            <span className="term">decision</span>
-            <span className="op">→</span>
-            <span className="term t-blue">bid</span>
-          </div>
-          <p className="tempo"><span>Milliseconds.</span></p>
+          <figure className="loop">
+            <div className="loop-bar"><span>Decide, then learn</span><span className="loop-tempo">Milliseconds.</span></div>
+            {/* Illustrative only: the fast bidding path, and the slower loop that turns outcomes into training data. */}
+            <svg viewBox="10 0 464 230" role="img" aria-label="A bid request goes to the model, which places a bid. The outcome becomes training data, which retrains the model.">
+              <defs><marker id="arrow-s1" viewBox="0 0 8 8" refX={7} refY={4} markerWidth={7} markerHeight={7} orient="auto"><path d="M0 0 8 4 0 8Z" fill="#1e1b19" /></marker></defs>
+              <g fontFamily="DM Mono, ui-monospace, monospace" fontSize={10} letterSpacing={1} fill="#8a847f">
+                <text x={12} y={28}>DECIDE · EVERY IMPRESSION</text>
+                <text x={12} y={222}>LEARN · FROM EVERY OUTCOME</text>
+              </g>
+              <g stroke="#1e1b19" strokeWidth={1.1} fill="none" markerEnd="url(#arrow-s1)">
+                <path d="M100 68h33" className="flow" /><path d="M224 68h33" className="flow" /><path d="M348 68h33" className="flow" />
+              </g>
+              <g stroke="#2f9e64" strokeWidth={1.2} fill="none" strokeDasharray="3 4">
+                <path d="M428 86v82h-103" markerEnd="url(#arrow-s1)" /><path d="M198 168h-18V89" markerEnd="url(#arrow-s1)" />
+              </g>
+              <g fontSize={13} textAnchor="middle" fill="#1e1b19">
+                <rect x={12} y={50} width={88} height={36} rx={4} fill="#fbfaf8" stroke="#1e1b19" /><text x={56} y={72}>Bid request</text>
+                <rect x={136} y={50} width={88} height={36} rx={4} fill="#d9e6fb" stroke="#3b6fd8" /><text x={180} y={72}>Model</text>
+                <rect x={260} y={50} width={88} height={36} rx={4} fill="#fbfaf8" stroke="#1e1b19" /><text x={304} y={72}>Bid</text>
+                <rect x={384} y={50} width={88} height={36} rx={4} fill="#fbfaf8" stroke="#1e1b19" /><text x={428} y={72}>Outcome</text>
+                <rect x={198} y={150} width={124} height={36} rx={4} fill="#d5f0e1" stroke="#2f9e64" /><text x={260} y={172}>Training data</text>
+              </g>
+              <g fontFamily="DM Mono, ui-monospace, monospace" fontSize={9.5} letterSpacing={.6} fill="#4a4542">
+                <text x={436} y={114}>win</text><text x={436} y={127}>click</text><text x={436} y={140}>sale</text>
+                <text x={188} y={128}>retrain</text>
+              </g>
+            </svg>
+            <figcaption>Every outcome becomes training data, so the models keep improving.</figcaption>
+          </figure>
         </article>
         <article className="system">
           <span className="label"><b>System 2</b></span>
@@ -184,18 +232,34 @@ export default function Page() { return (<><SiteHeader current="platform" />
           <div className="prose" style={{margin: '28px 0 0'}}>
             <p>Use Counter’s agent or bring your own.</p>
           </div>
-          <div className="equation" aria-label="Agent → observe → decide → act → repeat">
-            <span className="term">Agent</span>
-            <span className="op">→</span>
-            <span className="term">observe</span>
-            <span className="op">→</span>
-            <span className="term">decide</span>
-            <span className="op">→</span>
-            <span className="term">act</span>
-            <span className="op">→</span>
-            <span className="term t-violet">repeat</span>
-          </div>
-          <p className="tempo"><span>Always running.</span></p>
+          <figure className="loop">
+            <div className="loop-bar"><span>Observe, act, learn</span><span className="loop-tempo">Always running.</span></div>
+            {/* Illustrative only: the agent's loop, and how it retrains and redeploys System 1 models. */}
+            <svg viewBox="18 0 464 230" role="img" aria-label="The agent observes, decides, acts and learns in a loop. It retrains and deploys the models in the bidstream and observes their results.">
+              <defs><marker id="arrow-s2" viewBox="0 0 8 8" refX={7} refY={4} markerWidth={7} markerHeight={7} orient="auto"><path d="M0 0 8 4 0 8Z" fill="#1e1b19" /></marker></defs>
+              <g stroke="#1e1b19" strokeWidth={1.1} fill="none" markerEnd="url(#arrow-s2)" className="flow">
+                <path d="M212 40C246 52 262 72 268 94" /><path d="M268 128C262 150 246 170 212 182" />
+                <path d="M128 182C94 170 78 150 72 128" /><path d="M72 94C78 72 94 52 128 40" />
+              </g>
+              <g stroke="#2f9e64" strokeWidth={1.2} fill="none" strokeDasharray="3 4" markerEnd="url(#arrow-s2)">
+                <path d="M212 198H414v-68" /><path d="M414 92V24H214" />
+              </g>
+              <circle cx={170} cy={111} r={30} fill="#e3dcfb" stroke="#6b55c9" />
+              <g fontSize={13} textAnchor="middle" fill="#1e1b19">
+                <text x={170} y={115}>Agent</text>
+                <rect x={128} y={8} width={84} height={32} rx={4} fill="#fbfaf8" stroke="#1e1b19" /><text x={170} y={28}>Observe</text>
+                <rect x={228} y={95} width={84} height={32} rx={4} fill="#fbfaf8" stroke="#1e1b19" /><text x={270} y={115}>Decide</text>
+                <rect x={128} y={182} width={84} height={32} rx={4} fill="#fbfaf8" stroke="#1e1b19" /><text x={170} y={202}>Act</text>
+                <rect x={28} y={95} width={84} height={32} rx={4} fill="#d5f0e1" stroke="#2f9e64" /><text x={70} y={115}>Learn</text>
+                <rect x={356} y={93} width={116} height={36} rx={4} fill="#d9e6fb" stroke="#3b6fd8" /><text x={414} y={108} fontSize={11}>System 1</text><text x={414} y={122} fontSize={11}>models</text>
+              </g>
+              <g fontFamily="DM Mono, ui-monospace, monospace" fontSize={9.5} letterSpacing={.6} fill="#4a4542">
+                <text x={300} y={190}>retrain · deploy</text>
+                <text x={300} y={16}>results</text>
+              </g>
+            </svg>
+            <figcaption>Each result shapes the next decision, and better models go back into the bidstream.</figcaption>
+          </figure>
         </article>
       </div>
     </section>
@@ -232,16 +296,37 @@ export default function Page() { return (<><SiteHeader current="platform" />
         <p><strong>Your trained models remain yours.</strong></p>
         <h3><span>03</span>Combine models.</h3>
         <p>A media decision doesn’t have to come from one black-box algorithm. A single bid can draw on several models at once:</p>
-        <div className="equation stack" aria-label="Advertiser model × Agency model × Publisher model × Open model → Bid decision">
-          <span className="term t-blue">Advertiser model</span>
-          <span className="op">×</span>
-          <span className="term t-violet">Agency model</span>
-          <span className="op">×</span>
-          <span className="term t-amber">Publisher model</span>
-          <span className="op">×</span>
-          <span className="term t-green">Open model</span>
-          <span className="op">↓</span>
-          <span className="term result">Bid decision</span>
+        <div className="fig-panel">
+          <div className="fig-inner">
+            {/* Illustrative only: four models on one platform, combining into a single bid decision. */}
+            <svg viewBox="-60 24 680 300" role="img" aria-label="Advertiser, agency, publisher and open models combine into one bid decision">
+              <defs><marker id="combine-arr" viewBox="0 0 8 8" refX={7} refY={4} markerWidth={7} markerHeight={7} orient="auto"><path d="M0 0 8 4 0 8Z" fill="#1e1b19" /></marker></defs>
+              <g fontFamily="DM Mono, ui-monospace, monospace" fontSize={10} letterSpacing={1}>
+                <path d="M110 180v14l170 85 170 -85v-14" fill="#bcd0f2" fillOpacity=".75" stroke="#3b6fd8" strokeWidth="1.2" strokeLinejoin="round" />
+                <path d="M280 95 450 180 280 265 110 180Z" fill="#fbfaf8" stroke="#3b6fd8" strokeWidth="1.2" strokeLinejoin="round" />
+                <path d="M280 115 410 180 280 245 150 180Z" fill="none" stroke="#3b6fd8" strokeDasharray="3 4" strokeWidth=".8" />
+                <g stroke="#1e1b19" strokeWidth={1.1} fill="none" className="flow">
+                  <path d="M200 193 270 208" /><path d="M250 158 274 200" /><path d="M310 158 286 200" /><path d="M360 193 290 208" />
+                </g>
+                <Cube x={200} y={170} tones={['#d9e6fb', '#a9c0ea', '#c3d4f3']} />
+                <Cube x={250} y={135} tones={['#e3dcfb', '#bcaeef', '#cfc4f4']} />
+                <Cube x={310} y={135} tones={['#f6dfb3', '#dcb871', '#ebcd92']} />
+                <Cube x={360} y={170} tones={['#d5f0e1', '#9fd2b5', '#bde3cd']} />
+                <ellipse cx={280} cy={226} rx={34} ry={17} fill="#3b6fd8" fillOpacity=".12" />
+                <Cube x={280} y={210} w={18} h={22} tones={['#4a4542', '#1e1b19', '#2a2725']} />
+                <path d="M280 252V284" stroke="#1e1b19" strokeWidth={1.1} fill="none" className="flow" markerEnd="url(#combine-arr)" />
+                <Tag x={16} y={36} w={128} swatch="#e3dcfb" label="AGENCY MODEL" />
+                <path d="M144 49H196L246 124" stroke="#1e1b19" fill="none" strokeDasharray="2 3" />
+                <Tag x={16} y={96} w={157} swatch="#d9e6fb" label="ADVERTISER MODEL" />
+                <path d="M173 109H180L197 160" stroke="#1e1b19" fill="none" strokeDasharray="2 3" />
+                <Tag x={394} y={36} w={150} swatch="#f6dfb3" label="PUBLISHER MODEL" />
+                <path d="M394 49H364L314 124" stroke="#1e1b19" fill="none" strokeDasharray="2 3" />
+                <Tag x={430} y={96} w={114} swatch="#d5f0e1" label="OPEN MODEL" />
+                <path d="M430 109H423L363 160" stroke="#1e1b19" fill="none" strokeDasharray="2 3" />
+                <Tag x={216} y={290} w={128} swatch="#1e1b19" label="BID DECISION" />
+              </g>
+            </svg>
+          </div>
         </div>
         <p><strong>Models can be private, shared, open source or commercial. Counter is the ecosystem for portable media intelligence.</strong></p>
       </div>
@@ -254,16 +339,19 @@ export default function Page() { return (<><SiteHeader current="platform" />
         <h2>Built on ARTF.</h2>
       </div>
       <div className="block-body prose">
-        <div className="equation stack artf-stack" aria-label="Your model or bidder, inside an ARTF container, on the host platform, in the OpenRTB auction, over publisher supply">
-          <span className="term t-blue">Your model / bidder</span>
-          <span className="op">↓</span>
-          <span className="term t-violet">ARTF container</span>
-          <span className="op">↓</span>
-          <span className="term">Host platform</span>
-          <span className="op">↓</span>
-          <span className="term">OpenRTB</span>
-          <span className="op">↓</span>
-          <span className="term t-amber">Publisher supply</span>
+        <div className="artf-nest" role="img" aria-label="Your model or bidder, inside an ARTF container, on the host platform, in the OpenRTB auction, over publisher supply">
+          <div className="nest n-supply"><span>Publisher supply</span><i>05</i>
+            <div className="nest n-rtb"><span>OpenRTB</span><i>04</i>
+              <div className="nest n-host"><span>Host platform</span><i>03</i>
+                <div className="nest n-artf"><span>ARTF container</span><i>02</i>
+                  <div className="nest n-model">
+                    <svg width={18} height={20} viewBox="0 0 26 29" aria-hidden="true"><g stroke="#1e1b19" strokeWidth="1" strokeLinejoin="round"><path d="M0 6.5 13 13v16L0 22.5Z" fill="#7f9fdc" /><path d="M13 13 26 6.5v16L13 29Z" fill="#a9c0ea" /><path d="M13 0 26 6.5 13 13 0 6.5Z" fill="#fbfaf8" /></g></svg>
+                    Your model / bidder<i>01</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <p className="lead">Counter is built on <strong>ARTF, the IAB Tech Lab open standard for running software inside the programmatic bidstream.</strong></p>
         <p>Package decisioning once and run it inside supporting host infrastructure, close to the auction.</p>
@@ -279,6 +367,7 @@ export default function Page() { return (<><SiteHeader current="platform" />
       </div>
     </section>
     <div className="rule" />
+    <div className="band">
     <section className="frame block" id="agents">
       <div className="block-head">
         <span className="side-index">( 04 / 06 )</span>
@@ -352,6 +441,7 @@ export default function Page() { return (<><SiteHeader current="platform" />
         <p><strong>The media platform is an API. Agents are native operators.</strong></p>
       </div>
     </section>
+    </div>
     <div className="rule" />
     <section className="frame block" id="participants">
       <div className="block-head">
@@ -360,14 +450,62 @@ export default function Page() { return (<><SiteHeader current="platform" />
         <h2>Buyers + publishers.</h2>
       </div>
       <div className="block-body prose">
-        <div className="parties" aria-label="Advertisers bring objectives, data and outcomes; agencies bring strategy, models and commercial logic; both connect through Counter, which connects directly with publishers, who bring supply, signals, rules and models">
-          <div className="party t-blue"><span className="label">Advertiser</span>Objectives · data · outcomes</div>
-          <span className="op" aria-hidden="true">↓</span>
-          <div className="party t-violet"><span className="label">Agency</span>Strategy · models · commercial logic</div>
-          <span className="op" aria-hidden="true">↓</span>
-          <div className="party hub">Counter</div>
-          <span className="op" aria-hidden="true">↕</span>
-          <div className="party t-amber"><span className="label">Publisher</span>Supply · signals · rules · models</div>
+        <div className="fig-panel">
+          <div className="fig-inner">
+            {/* Illustrative only: buyers connect through Counter directly to publisher supply, skipping reselling hops. */}
+            <svg viewBox="-110 0 780 490" role="img" aria-label="Advertisers bring objectives, data and outcomes; agencies bring strategy, models and commercial logic; both connect through Counter, which connects directly with publishers, who bring supply, signals, rules and models. A detour through reselling hops is bypassed.">
+              <defs>
+                <marker id="bp-arr-ink" viewBox="0 0 8 8" refX={7} refY={4} markerWidth={7} markerHeight={7} orient="auto"><path d="M0 0 8 4 0 8Z" fill="#1e1b19" /></marker>
+                <marker id="bp-arr-amber" viewBox="0 0 8 8" refX={7} refY={4} markerWidth={7} markerHeight={7} orient="auto"><path d="M0 0 8 4 0 8Z" fill="#b8862a" /></marker>
+              </defs>
+              <g fontFamily="DM Mono, ui-monospace, monospace" fontSize={10} letterSpacing={1}>
+                {/* Reselling detour, faded and bypassed */}
+                <path d="M470 100H540V380H400" stroke="#8a847f" strokeWidth={1} fill="none" strokeDasharray="2 4" opacity=".8" />
+                {[170, 250, 320].map(y => <g key={y} opacity=".55"><Cube x={540} y={y} w={10} h={12} tones={['#fbfaf8', '#e3e0db', '#efece8']} /></g>)}
+                {/* Publisher supply: layered slab of inventory */}
+                <Slab x={280} y={404} hw={120} hh={60} t={8} top="#fbfaf8" side="#e9eef8" opacity={.55} />
+                <Slab x={280} y={392} hw={120} hh={60} t={8} top="#fbfaf8" side="#e9eef8" opacity={.8} />
+                <Slab x={280} y={380} hw={120} hh={60} t={8} top="#fbfaf8" side="#e9eef8" />
+                {[-1, 0, 1].flatMap(i => [-1, 0, 1].map(j => {
+                  const cx = 280 + 40 * i - 40 * j, cy = 380 + 20 * i + 20 * j;
+                  return <path key={`${i}${j}`} d={`M${cx} ${cy - 8} ${cx + 16} ${cy} ${cx} ${cy + 8} ${cx - 16} ${cy}Z`} fill={(i + j) % 2 ? '#eef3fd' : '#f6dfb3'} stroke="#3b6fd8" strokeWidth=".8" />;
+                }))}
+                {/* Bids down, publisher signals up */}
+                <path d="M270 314V362" stroke="#1e1b19" strokeWidth={1.1} fill="none" className="flow" markerEnd="url(#bp-arr-ink)" />
+                <path d="M292 368V318" stroke="#b8862a" strokeWidth={1.3} fill="none" className="flow" markerEnd="url(#bp-arr-amber)" />
+                {/* Buyers */}
+                <Slab x={170} y={100} hw={80} hh={40} t={10} top="#eef3fd" side="#bcd0f2" />
+                <path d="M135 93 149 100 135 107 121 100Z M205 93 219 100 205 107 191 100Z" fill="#d9e6fb" stroke="#3b6fd8" strokeWidth=".8" />
+                <Cube x={170} y={94} w={11} h={13} tones={['#d9e6fb', '#a9c0ea', '#c3d4f3']} />
+                <Slab x={390} y={100} hw={80} hh={40} t={10} top="#f2effd" side="#cfc4f4" />
+                <Cube x={360} y={98} w={10} h={12} tones={['#e3dcfb', '#bcaeef', '#cfc4f4']} />
+                <Cube x={390} y={83} w={10} h={12} tones={['#e3dcfb', '#bcaeef', '#cfc4f4']} />
+                <Cube x={420} y={98} w={10} h={12} tones={['#e3dcfb', '#bcaeef', '#cfc4f4']} />
+                <path d="M170 152 222 208" stroke="#1e1b19" strokeWidth={1.1} fill="none" className="flow" markerEnd="url(#bp-arr-ink)" />
+                <path d="M390 152 338 208" stroke="#1e1b19" strokeWidth={1.1} fill="none" className="flow" markerEnd="url(#bp-arr-ink)" />
+                {/* Counter: the dark hub between both sides */}
+                <ellipse cx={280} cy={262} rx={150} ry={62} fill="#3b6fd8" fillOpacity=".1" />
+                <Slab x={280} y={240} hw={110} hh={55} t={16} top="#2a2725" side="#1e1b19" stroke="#1e1b19" />
+                <path d="M280 200 360 240 280 280 200 240Z" fill="none" stroke="#fbfaf8" strokeOpacity=".35" strokeDasharray="3 4" />
+                <path d="M225 212.5 335 267.5M335 212.5 225 267.5" stroke="#fbfaf8" strokeOpacity=".12" />
+                <path d="M240 234 252 240 240 246 228 240Z" fill="#d9e6fb" />
+                <path d="M280 214 292 220 280 226 268 220Z" fill="#e3dcfb" />
+                <path d="M320 234 332 240 320 246 308 240Z" fill="#d5f0e1" />
+                <path d="M280 254 292 260 280 266 268 260Z" fill="#f6dfb3" />
+                <path d="M280 233 287 237 280 241 273 237Z M273 241l7 4 7-4 M273 245l7 4 7-4" fill="none" stroke="#fbfaf8" strokeWidth="1.3" strokeLinejoin="round" strokeLinecap="round" />
+                {/* Tags */}
+                <Tag x={-44} y={14} w={204} swatch="#d9e6fb" label="ADVERTISER" sub="OBJECTIVES · DATA · OUTCOMES" />
+                <path d="M40 56V74L104 98" stroke="#1e1b19" fill="none" strokeDasharray="2 3" />
+                <Tag x={350} y={14} w={262} swatch="#e3dcfb" label="AGENCY" sub="STRATEGY · MODELS · COMMERCIAL LOGIC" />
+                <path d="M480 56V70L446 92" stroke="#1e1b19" fill="none" strokeDasharray="2 3" />
+                <Tag x={-44} y={227} w={100} swatch="#1e1b19" label="COUNTER" />
+                <path d="M56 240H168" stroke="#1e1b19" fill="none" strokeDasharray="2 3" />
+                <Tag x={-44} y={442} w={240} swatch="#f6dfb3" label="PUBLISHER" sub="SUPPLY · SIGNALS · RULES · MODELS" />
+                <path d="M60 442V408L158 384" stroke="#1e1b19" fill="none" strokeDasharray="2 3" />
+                <Tag x={462} y={204} w={150} swatch="#fbfaf8" label="RESELLING HOPS" muted />
+              </g>
+            </svg>
+          </div>
         </div>
         <p className="lead">Counter gives both sides a clearer path to one another.</p>
         <p>Existing supply infrastructure can still be used where it makes sense. The result is <strong>fewer unnecessary hops, less reselling and clear provenance.</strong></p>
@@ -414,10 +552,10 @@ export default function Page() { return (<><SiteHeader current="platform" />
       <span className="label">( Get involved )</span>
       <h2 style={{marginTop: 28}}>Build on <span className="hl hl-blue" style={{color: 'var(--ink)'}}>Counter.</span></h2>
       <p>For developers, the shorthand is:</p>
-      <div className="equation stack" aria-label="Cloudflare Workers for RTB + Hugging Face for buying models + an agentic control plane">
+      <div className="equation stack" aria-label="Cloudflare Workers for RTB + Hugging Face for bidding models + an agentic control plane">
         <span className="term t-amber">Cloudflare Workers for RTB</span>
         <span className="op">+</span>
-        <span className="term t-blue">Hugging Face for buying models</span>
+        <span className="term t-blue">Hugging Face for bidding models</span>
         <span className="op">+</span>
         <span className="term t-violet">an agentic control plane</span>
       </div>

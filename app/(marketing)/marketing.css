@@ -48,8 +48,8 @@ p { margin: 0; }
   content: ""; position: absolute; top: -3px; width: 5px; height: 5px;
   background: var(--line-strong); border-radius: 50%;
 }
-.rule::before { left: calc(50% - var(--max) / 2 - 3px); }
-.rule::after { right: calc(50% - var(--max) / 2 - 3px); }
+.rule::before { left: calc(50% - var(--max) / 2 - 2px); }
+.rule::after { right: calc(50% - var(--max) / 2 - 2px); }
 @media (max-width: 1160px) { .rule::before, .rule::after { display: none; } }
 
 .label {
@@ -472,8 +472,6 @@ footer { border-top: 1px solid var(--dark-line); }
 .prose h3 { font-size: clamp(22px, 2.4vw, 26px); line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line); }
 .prose h3 span { display: block; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--ink-3); margin-bottom: 10px; }
 .prose .lead + h3 { margin-top: 40px; }
-.artf-stack { max-width: 460px; margin: 0 0 40px; gap: 8px; }
-.artf-stack .term { padding: 16px 20px; font-size: 18px; text-align: center; }
 .tag-list.efficiency { margin: 28px 0 0; }
 .tag-list.efficiency li { background: var(--hl-green); border-color: transparent; color: var(--ink); }
 .prose a { color: var(--ink); text-underline-offset: 3px; }
@@ -490,7 +488,7 @@ footer { border-top: 1px solid var(--dark-line); }
 .own-list li::before { content: ""; position: absolute; left: 4px; top: 22px; width: 10px; height: 10px; border-radius: 50%; background: var(--hl-green); box-shadow: inset 0 0 0 1px #9fd2b5; }
 .own-list li.yours::before { background: var(--hl-amber); box-shadow: inset 0 0 0 1px #dcb871; }
 .own-list strong { display: block; font-size: 17px; margin-bottom: 2px; }
-.own-list li:nth-child(odd) { border-right: 1px solid var(--line); }
+.own-list li:nth-child(odd) { padding-right: 24px; }
 .own-list li:last-child:nth-child(odd) { grid-column: 1 / -1; border-right: 0; }
 .equation.lineage { gap: 6px; }
 .equation.lineage .term { padding: 8px 12px; font-size: 15px; }
@@ -570,3 +568,50 @@ details[open]::details-content { block-size: auto; }
   .aud-art .art-inner { aspect-ratio: 16 / 9; }
   .aud-art .art-inner svg { width: auto; height: 86%; }
 }
+
+/* Two systems: align rows across both columns, with a learning-loop figure at the bottom. */
+@media (min-width: 961px) {
+  .systems { grid-template-rows: repeat(6, auto); }
+  .system { display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
+  .system .q-list, .system .check-list { align-self: start; }
+}
+.loop { margin: 4px 0 0; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--bg-raised); overflow: hidden; display: flex; flex-direction: column; }
+.loop figcaption { flex: 1; }
+.loop-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.loop-tempo { padding: 2px 8px; border-radius: 3px; background: var(--hl-blue); color: var(--ink); text-transform: none; letter-spacing: .06em; }
+.system:nth-child(2) .loop-tempo { background: var(--hl-violet); }
+.loop svg { display: block; width: 100%; height: auto; padding: 18px 14px 10px; }
+.loop figcaption { padding: 12px 14px 14px; border-top: 1px dashed var(--line); font-size: 14px; color: var(--ink-2); }
+
+/* Section figures: the hero's isometric style on a lighter, simpler panel. */
+.fig-panel { border: 1px dashed var(--line-strong); padding: 8px; margin: 28px 0; }
+.fig-inner {
+  background:
+    linear-gradient(rgba(255,255,255,.7) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(90deg, rgba(255,255,255,.7) 1px, transparent 1px) 0 0 / 32px 32px,
+    radial-gradient(120% 90% at 30% 20%, #eef3fd 0%, #dfe8f9 60%, #d3e0f6 100%);
+  padding: 12px;
+}
+.fig-inner svg { display: block; width: 100%; height: auto; }
+
+/* ARTF: each layer runs inside the next, from your model out to publisher supply. */
+.artf-nest { max-width: 420px; margin: 0 0 40px; }
+.nest { position: relative; border: 1px solid var(--line-strong); border-radius: 6px; padding: 28px 10px 10px; background: var(--bg-raised); }
+.nest > span, .nest > i { position: absolute; top: 8px; font-family: var(--mono); font-size: 10px; font-style: normal; letter-spacing: .08em; text-transform: uppercase; line-height: 1; }
+.nest > span { left: 12px; color: var(--ink-2); }
+.nest > i { right: 12px; color: var(--ink-3); }
+.n-supply { background: #fbf1dc; border-color: #dcb871; }
+.n-supply > span::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 1.5px; background: var(--hl-amber); box-shadow: inset 0 0 0 1px #dcb871; margin-right: 7px; vertical-align: -1px; }
+.n-rtb { background: var(--bg-raised); }
+.n-host { background: #f3f7fe; border-color: var(--accent-soft); }
+.n-artf { background: #f6f3fe; border: 1px dashed #6b55c9; }
+.n-model { display: flex; align-items: center; gap: 10px; padding: 14px 12px; border-color: var(--accent); background: var(--hl-blue); font-size: 16px; color: var(--ink); }
+.n-model > i { top: 50%; transform: translateY(-50%); }
+
+/* A full-width tinted band with a faint dot grid, to break up the page as you scroll. */
+.band {
+  background:
+    radial-gradient(circle, rgba(30, 27, 25, .09) 1px, transparent 1.4px) 0 0 / 16px 16px,
+    #efede8;
+}
+.band .frame { border-color: var(--line-strong); }
