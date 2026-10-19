@@ -1,0 +1,26 @@
+---
+title: Introducing Counter
+description: Buyer-controlled bidding inside the exchange, with a Rust auction core and an MCP deployment workflow.
+date: "2026-10-19"
+draft: false
+---
+
+We are building Counter, a supply-side platform where buyers run their bidding
+logic inside the exchange. The bidder returns a price directly, without a separate
+DSP in the auction path.
+
+Buyers keep control of how they value an impression. Counter runs the auction and
+enforces bidding deadlines. Bringing the two together is intended to reduce network
+travel and the infrastructure needed to operate a bidder.
+
+The prototype supports writing a bidder in Rust, building and checking it, then
+deploying it into synthetic traffic. Coding agents can do this through MCP, inspect
+results, update the bidder and roll back a version. The same operations are
+available through the API and React UI.
+
+The auction core is Rust, with gRPC between the worker and bidders. TypeScript
+handles deployment and management. Prometheus metrics show auction latency, errors
+and bidder results. Bidders run as local processes or containers in our K3s lab.
+
+We are early. The demo runs on synthetic traffic, and production isolation and
+capacity across independent hosts are still work ahead.
