@@ -1,26 +1,28 @@
 ---
 title: Introducing Counter
-description: Buyer-controlled bidding inside the exchange, with a Rust auction core and an MCP deployment workflow.
+description: Custom buying strategies for advertisers, agencies and publishers, built around their data and outcomes.
 date: "2026-10-19"
 draft: false
 ---
 
-We are building Counter, a supply-side platform where buyers run their bidding
-logic inside the exchange. The bidder returns a price directly, without a separate
-DSP in the auction path.
+We are building Counter so advertisers, agencies and publishers can bring their
+own data and expertise into how media is bought. You decide what an impression
+is worth based on the outcomes that matter to your business.
 
-Buyers keep control of how they value an impression. Counter runs the auction and
-enforces bidding deadlines. Bringing the two together is intended to reduce network
-travel and the infrastructure needed to operate a bidder.
+For advertisers, that means using sales, qualified leads or store visits to guide
+spend, with brand requirements built into buying decisions. Agencies can turn
+their expertise into buying products, reuse strategies across campaigns and keep
+the models they develop. Publishers can bring audience, context and placement
+signals into the decision, helping buyers recognise the value of their inventory.
 
-The prototype supports writing a bidder in Rust, building and checking it, then
-deploying it into synthetic traffic. Coding agents can do this through MCP, inspect
-results, update the bidder and roll back a version. The same operations are
-available through the API and React UI.
+Start with a Counter model or bring your own. Your models and data remain yours.
+You can inspect how decisions are made and access or export your logs without an
+additional fee. Open APIs let you build your own workflows around the platform.
 
-The auction core is Rust, with gRPC between the worker and bidders. TypeScript
-handles deployment and management. Prometheus metrics show auction latency, errors
-and bidder results. Bidders run as local processes or containers in our K3s lab.
+Underneath, a Rust auction core runs bidding logic close to the auction, reducing
+the need to move requests between systems. APIs and MCP let agents operate the
+platform, so teams can automate routine work while keeping rules and approvals
+explicit.
 
-We are early. The demo runs on synthetic traffic, and production isolation and
-capacity across independent hosts are still work ahead.
+We are building the first version. [Join the waitlist](/#waitlist) to help shape
+the first campaigns on Counter.
