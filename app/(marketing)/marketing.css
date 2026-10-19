@@ -497,3 +497,12 @@ footer { border-top: 1px solid var(--dark-line); }
   .own-list li:nth-child(odd) { border-right: 0; }
 }
 .closing .equation .term { color: var(--ink); font-size: 17px; }
+
+.blog-post { padding: 64px var(--gutter); min-height: 80vh; }
+.blog-post h1 { font-size: clamp(40px, 5.2vw, 62px); line-height: 1.04; margin: 24px 0; }
+.blog-post article { max-width: 760px; margin-top: 40px; }
+.blog-post article p, .blog-post article ul, .blog-post article pre { margin: 20px 0; }
+.blog-post article h2, .blog-post article h3 { margin-top: 36px; }
+.blog-post pre { overflow-x: auto; padding: 20px; background: var(--bg-raised); border: 1px solid var(--line); }
+.blog-post img { max-width: 100%; height: auto; }
+.blog-list article { padding: 32px 0; border-bottom: 1px solid var(--line); }
