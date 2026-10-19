@@ -10,3 +10,8 @@
 }
 body { margin: 0; font-family: 'Inter Tight', sans-serif; }
 code, pre { font-family: 'DM Mono', monospace; }
+
+.docs-label { border-left: 1px solid var(--color-fd-border); padding-left: 10px; font-size: 13px; color: var(--color-fd-muted-foreground); }
+.docs-website-link { display: flex; align-items: center; gap: 8px; padding: 8px 0 14px; border-bottom: 1px solid var(--color-fd-border); font-size: 13px; color: var(--color-fd-muted-foreground); }
+.docs-website-link:hover { color: var(--color-fd-foreground); }
+.docs-website-link:focus-visible { outline: 2px solid var(--color-fd-primary); outline-offset: 4px; border-radius: 2px; }
