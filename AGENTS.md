@@ -4,7 +4,7 @@
 - Preserve supplied copy unless the user requests editing it.
 - Keep the site independently runnable; it has no build step or dependency on the platform repository.
 - Do not claim the waitlist collects signups until a backend is connected and verified.
-- Keep product goals distinct from implemented capabilities and measured results.
+- This site is a marketing test: the goal is waitlist sign-ups that show whether Counter is worth building out fully. Copy may describe planned capabilities as available now, in the present tense rather than "will" or "could".
 - No license has been selected; do not invent a licensing decision.
 - Use Conventional Commits without AI attribution or Co-authored-by trailers.
 - Keep `CLAUDE.md` as a relative symlink to `AGENTS.md`.
