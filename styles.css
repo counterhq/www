@@ -109,6 +109,7 @@ header {
 .hero h1, .page-hero h1 { font-size: clamp(40px, 5.2vw, 62px); line-height: 1.04; margin-bottom: 28px; }
 .hero-text p { font-size: 17px; color: var(--ink-2); max-width: 470px; }
 .hero-text p + p { margin-top: 14px; }
+.hero-text strong { color: var(--ink); font-weight: 500; }
 .hero-cta { border-top: 1px solid var(--line); background: var(--bg-raised); padding: 28px var(--gutter); }
 .hero-cta .note { margin-top: 14px; font-size: 14px; color: var(--ink-3); max-width: 420px; }
 .hero-art { padding: 16px; }
@@ -161,6 +162,8 @@ header {
 .audiences .pillar .num { margin-bottom: 40px; }
 .audiences .pillar h3 { font-size: 26px; }
 .audiences .pillar p:first-of-type { color: var(--ink); font-size: 17px; }
+.audiences.two { grid-template-columns: repeat(2, 1fr); }
+.audiences.two .pillar:nth-child(2n) { border-right: 0; }
 .audiences .pillar.pub { background: var(--bg-raised); }
 .audiences .pillar.pub::before { width: 100%; background: var(--hl-amber); height: 3px; }
 
@@ -246,7 +249,7 @@ footer { border-top: 1px solid var(--dark-line); }
   .open-list li { border-bottom: 1px solid var(--line); }
   .open-list li:nth-child(2n) { border-right: 0; }
   .open-list li:last-child { grid-column: 1 / -1; border-bottom: 0; }
-  .audiences { grid-template-columns: 1fr; }
+  .audiences, .audiences.two { grid-template-columns: 1fr; }
   .audiences .pillar:nth-child(n) { border-right: 0; border-bottom: 1px solid var(--line); }
   .audiences .pillar:last-child { border-bottom: 0; }
   .faq-side { padding-bottom: 56px; }
@@ -344,6 +347,11 @@ footer { border-top: 1px solid var(--dark-line); }
 .equation .term.result { background: var(--ink); color: var(--bg); }
 .equation.stack { flex-direction: column; align-items: stretch; gap: 6px; max-width: 420px; }
 .equation.stack .op { text-align: center; }
+.system .equation { gap: 8px; margin: 24px 0 0; }
+.system .equation .term { padding: 8px 12px; font-size: 15px; }
+.equation.stack.compact { gap: 2px; }
+.equation.stack.compact .term { padding: 8px 14px; font-size: 15px; }
+.equation.stack.compact .op { font-size: 14px; line-height: 1.2; }
 .term.t-blue { background: var(--hl-blue); border-color: transparent; }
 .term.t-violet { background: var(--hl-violet); border-color: transparent; }
 .term.t-amber { background: var(--hl-amber); border-color: transparent; }
