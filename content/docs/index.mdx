@@ -1,10 +1,58 @@
 ---
-title: Counter documentation
-description: An open platform for programmatic media.
+title: Overview
+description: Counter is open infrastructure for running your own buying decisions in the programmatic bidstream.
 ---
 
-Counter is an open platform for advertisers, agencies and publishers.
+Counter lets advertisers, agencies and publishers buy and sell media using their own
+buying strategies. You decide which impressions to buy and what to pay, based on the
+outcomes that matter to your business, and you can see how every decision is made.
 
-## Documentation
+## How Counter works
 
-Developer guides and API documentation are coming soon.
+Media buying happens at two speeds, so Counter has two systems.
+
+**System 1: models decide.** Every impression needs a decision in milliseconds. Your
+strategies and models run inside the bidstream, close to the auction, on Counter's Rust
+auction core. Each one answers a narrow question: should we bid, what is this impression
+worth, and what should we pay?
+
+**System 2: agents manage.** Campaigns run for days, weeks or months. An always-on agent
+watches performance, investigates changes, adjusts budgets, runs experiments and deploys
+new versions of your strategies. Use Counter's agent, or connect your own through
+[MCP](https://modelcontextprotocol.io) and the API.
+
+Outcomes such as wins, clicks and sales flow back from System 1 to System 2, so each
+result can inform the next decision.
+
+<TwoSystemsDiagram />
+
+## Who it's for
+
+- **Advertisers** use sales, qualified leads or store visits to guide spend, with brand
+  requirements built into buying decisions.
+- **Agencies** turn their expertise into buying products, reuse strategies across
+  clients and keep the models they develop.
+- **Publishers** bring audience, context and placement signals into the decision, with
+  rules for how their supply and signals are used.
+
+## Open by design
+
+- **Open bidder.** You can see the logic that buys your media.
+- **Open models.** Start with a Counter model, adapt it, or bring your own.
+- **Open APIs.** Everything in the platform is programmable, by people or agents.
+- **Built on ARTF.** Counter uses the [IAB Tech Lab's Agentic RTB Framework](https://iabtechlab.com/standards/artf/)
+  to run decisioning inside the bidstream instead of inventing a proprietary format.
+
+Your models, data and logs stay yours. Accessing or exporting your own logs costs nothing extra.
+
+## Next steps
+
+<Cards>
+  <Card title="Quickstart" href="/docs/quickstart" description="Deploy your first buying strategy and watch it bid." />
+  <Card title="Core concepts" href="/docs/concepts" description="Strategies, bidders, versions, agents and outcomes." />
+</Cards>
+
+<Callout title="Early access">
+Counter is in early access. Workspaces, API tokens and MCP endpoints are issued to
+early-access partners. [Join the waitlist](/#waitlist) to take part.
+</Callout>

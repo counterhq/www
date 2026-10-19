@@ -1,0 +1,112 @@
+---
+title: Quickstart
+description: Write a buying strategy, test it, deploy it into the auction and watch it bid.
+---
+
+This guide takes you from an empty workspace to a live strategy. You'll do it with a
+coding agent, because that's the fastest way to work with Counter. Every step is also
+available through the API.
+
+<QuickstartFlowDiagram />
+
+<Callout title="Before you start">
+You need a Counter workspace with its MCP endpoint and API token. These are issued to
+early-access partners. [Join the waitlist](/#waitlist) to get one.
+</Callout>
+
+## 1. Connect your agent
+
+Counter exposes its platform operations as MCP tools. Add your workspace to any
+MCP-capable agent, such as Claude Code, Claude Desktop or ChatGPT:
+
+```json
+{
+  "mcpServers": {
+    "counter": {
+      "url": "<your workspace MCP endpoint>",
+      "headers": { "Authorization": "Bearer <your API token>" }
+    }
+  }
+}
+```
+
+Ask your agent to call `get_bidder_contract`. It returns the strategy schema, the
+auction rules and the limits for your workspace, so the agent knows what it can deploy.
+
+## 2. Write a strategy
+
+A strategy is a small JSON document that turns each opportunity into a bid or a no-bid.
+This one bids on most inventory, pays a premium on a news site and skips large formats:
+
+```json title="news-premium.json"
+{
+  "base_cpm": 1.8,
+  "max_cpm": 4.0,
+  "jitter": 0.2,
+  "bid_rate": 0.8,
+  "domain_multipliers": { "news.example": 1.5 },
+  "size_multipliers": { "320x50": 0.6, "300x600": 0 },
+  "creative_id": "spring-launch-banner"
+}
+```
+
+The bid is `base_cpm × domain multiplier × size multiplier × (1 ± jitter)`, capped at
+`max_cpm`. A multiplier of `0` skips that inventory. A bid below the floor becomes a
+no-bid. Decisions are deterministic: the same request always gets the same answer.
+
+You don't have to write this yourself. Describe what you want and let the agent draft it:
+
+> Buy broadly at a moderate price, pay more on news.example, and skip 300x600.
+
+## 3. Test it before it spends
+
+Ask the agent to call `evaluate_strategy`. Counter validates the strategy with the same
+runtime that runs it in the auction, then bids on a sample of opportunities. The report
+shows how often it bids, its price range and the inventory it favours. Nothing is deployed.
+
+If the result isn't what you expected, change the strategy and evaluate it again.
+
+## 4. Deploy it
+
+When you're happy, ask the agent to call `deploy_bidder`:
+
+```json
+{
+  "id": "news-premium",
+  "description": "Pays a premium on news, skips large formats.",
+  "replicas": 2,
+  "strategy": { "...": "the strategy from step 2" }
+}
+```
+
+Counter creates version 1 of the bidder, warms it up and health-checks every replica.
+Only ready replicas join the auction. From then on, the bidder answers every opportunity
+routed to it, within the auction's deadline.
+
+## 5. Watch it bid
+
+Ask the agent how it's doing. It uses:
+
+- `get_metrics` for auctions per second, bid rate, win share, mean winning CPM and latency.
+- `get_recent_auctions` for individual auctions: the floor, your price and the winning price.
+- `get_events` for the deployment history and any failures.
+
+You'll see the same data in the Counter dashboard.
+
+## 6. Change it safely
+
+Strategies change under live traffic without downtime. `update_bidder` rolls out a new,
+immutable version: Counter warms it up, checks it, switches traffic over and drains the
+old one. If the new version underperforms, `rollback_bidder` brings back an earlier one.
+
+Agents can do this on a schedule, with your rules:
+
+> Every weekday at 8am, check news-premium. If win share drops by more than a quarter,
+> find out why and propose a change. Ask me before deploying it.
+
+## Next steps
+
+<Cards>
+  <Card title="Core concepts" href="/docs/concepts" description="How strategies, bidders, versions and outcomes fit together." />
+  <Card title="Overview" href="/docs" description="How Counter's two systems work." />
+</Cards>

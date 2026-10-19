@@ -1,0 +1,83 @@
+---
+title: Core concepts
+description: The building blocks of Counter, and how a bid decision is made.
+---
+
+## Opportunity
+
+An opportunity is one impression offered for sale: a bid request from publisher supply.
+It describes the site, the placement size, the floor price and the time allowed to
+answer. Counter follows the [OpenRTB](https://iabtechlab.com/standards/openrtb/) and
+[ARTF](https://iabtechlab.com/standards/artf/) standards from IAB Tech Lab.
+
+## Strategy
+
+A strategy is your buying logic. Given an opportunity, it decides whether to bid, at what
+price and with which creative. Strategies come in two forms:
+
+- **Declarative strategies** are JSON: a base price, a cap, and multipliers by domain and
+  placement size. They're quick to write, easy to review and safe for an agent to change.
+  The [quickstart](/docs/quickstart) uses one.
+- **Code strategies** are your own bidder written in Rust against the Counter SDK. Use
+  one when you need logic a declarative strategy can't express, such as calling your own
+  model.
+
+## Model
+
+A model scores an opportunity: how likely it is to convert, how much attention it is
+likely to get, how suitable the environment is, or what it's worth. Strategies use
+models to make better decisions. A single bid can draw on several models at once.
+
+Start with Counter's open models for conversion, attention, quality, context, bid
+pricing and incrementality. You can fine-tune them on your own campaign and outcome
+data, or bring your own. The models you train are yours.
+
+## Bidder
+
+A bidder is a strategy deployed into the auction. It has an ID, an owner and one or more
+**replicas**. Replicas add capacity and resilience, but a bidder always makes one bid
+per opportunity, however many replicas it has.
+
+A replica only receives traffic after it has warmed up and passed health checks. When a
+replica stops, Counter drains it first so that auctions already in progress can finish.
+
+## Version
+
+Every change to a bidder creates a new, immutable **version**. A version records exactly
+what is running: the strategy, or the digest of the built code. Rolling out a version
+happens under live traffic: warm, check, switch, drain. Rolling back redeploys an earlier
+version as a new one, so the history is never rewritten.
+
+<RolloutDiagram />
+
+## Auction
+
+For each opportunity, Counter asks the selected bidders for a decision, collects the
+answers that arrive before the deadline, and picks the winner. A bidder that is late,
+fails or returns an invalid answer is treated as a no-bid for that auction. It never
+holds up the auction or affects anyone else's bid.
+
+<AuctionDiagram />
+
+## Agent
+
+An agent manages your bidders over time. It can read metrics and recent auctions,
+investigate changes, test strategies, deploy and roll back versions, and ask for your
+approval. Use Counter's agent or connect your own through MCP or the API. An agent can
+only act on bidders it owns and within the permissions you give it.
+
+## Outcome
+
+Outcomes are what happens after a bid: wins, clicks, sales, store visits or qualified
+leads. Outcomes flow back to your agents and become training data for your models, so
+your strategies improve over time.
+
+## Logs and metrics
+
+Every decision is traceable from the impression to the outcome:
+
+**Opportunity → Models → Scores → Decision → Bid → Result → Outcome**
+
+Metrics include auctions per second, bid rate, win share, mean winning CPM and latency.
+You see full detail for your own bidders and aggregates for everyone else. Accessing or
+exporting your own logs costs nothing extra.
