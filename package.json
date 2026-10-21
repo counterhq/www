@@ -16,6 +16,7 @@
     "node": "24.x"
   },
   "dependencies": {
+    "@next/third-parties": "16.4.2",
     "fumadocs-core": "^16.17.5",
     "fumadocs-mdx": "^15.4.7",
     "fumadocs-ui": "^16.17.5",
