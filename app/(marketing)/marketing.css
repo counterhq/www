@@ -206,6 +206,9 @@ details[open] summary .plus::after { transform: rotate(0deg); }
 summary:hover { background: var(--bg-raised); }
 .answer { padding: 0 var(--gutter) 30px calc(var(--gutter) + 56px); color: var(--ink-2); max-width: 760px; }
 .answer p + p, .answer p + blockquote { margin-top: 12px; }
+.answer ul { margin: 12px 0; padding-left: 18px; }
+.answer li + li { margin-top: 6px; }
+.answer strong { color: var(--ink); font-weight: 500; }
 .answer blockquote { margin: 0; padding: 14px 18px; border-left: 2px solid var(--accent); background: var(--bg-raised); color: var(--ink); }
 
 /* Waitlist band */

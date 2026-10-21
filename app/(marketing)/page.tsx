@@ -194,9 +194,16 @@ export default function Page() { return (<><SiteHeader />
           </div>
         </details>
         <details>
-          <summary><span className="q-num">02</span>How is Counter different from a DSP?<span className="plus" /></summary>
+          <summary><span className="q-num">02</span>Is Counter an SSP or a DSP?<span className="plus" /></summary>
           <div className="answer">
-            <p>A DSP applies the same bidding logic to every buyer. Counter lets you run your own models to decide which impressions to buy and what to pay, on open technology you can inspect.</p>
+            <p>Neither. Counter is a new kind of RTB infrastructure that brings both sides together. Everyone deploys their own logic into the same bidstream:</p>
+            <ul>
+              <li><strong>Advertisers</strong> bid on the outcomes that matter to their business.</li>
+              <li><strong>Agencies</strong> run their own buying strategies for each client.</li>
+              <li><strong>Data curators</strong> offer their audiences and signals to buyers.</li>
+              <li><strong>Publishers</strong> decide how their supply and signals are used.</li>
+            </ul>
+            <p>No extra hops in between.</p>
           </div>
         </details>
         <details>
