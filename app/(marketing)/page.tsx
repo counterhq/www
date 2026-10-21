@@ -2,7 +2,7 @@ import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { WaitlistForm } from "@/components/waitlist-form";
 import { pageMetadata } from "@/lib/metadata";
-export const metadata = pageMetadata("Counter — Programmatic buying built around your outcomes", "Counter brings advertisers, agencies and publishers together to buy and sell media using custom buying strategies.", "/");
+export const metadata = pageMetadata("Counter — Programmatic, on your terms", "An open platform for advertisers, agencies and publishers to run their own intelligence in the bidstream.", "/");
 // Illustrative only: each audience's tile from the hero diagram, on its own slab.
 const TONES = { advertiser: ['#d9e6fb', '#a9c0ea'], agency: ['#e3dcfb', '#bcaeef'], publisher: ['#f6dfb3', '#dcb871'] } as const;
 function Tile({ x, y, kind }: { x: number; y: number; kind: keyof typeof TONES }) {
@@ -33,9 +33,9 @@ export default function Page() { return (<><SiteHeader />
     <section className="frame hero">
       <div className="hero-copy">
         <div className="hero-text">
-          <h1>Programmatic buying built around your outcomes</h1>
-          <p>Counter brings <strong>advertisers, agencies and publishers</strong> together to buy and sell media using custom buying strategies.</p>
-          <p>Use sales data, brand requirements and publisher signals to decide which impressions to buy and what to pay.</p>
+          <h1>Programmatic, on your terms.</h1>
+          <p>An open platform for <strong>advertisers, agencies and publishers</strong> to run their own intelligence in the bidstream.</p>
+          <p className="hero-tagline">Your models. Your agents. Your rules.</p>
         </div>
         <div className="hero-cta">
           <a className="btn btn-solid" href="#waitlist">Join the waitlist</a>

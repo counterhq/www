@@ -114,6 +114,8 @@ header {
 .hero-text p { font-size: 17px; color: var(--ink-2); max-width: 470px; }
 .hero-text p + p { margin-top: 14px; }
 .hero-text strong { color: var(--ink); font-weight: 500; }
+.hero .hero-text p { font-size: 20px; max-width: 520px; }
+.hero .hero-text .hero-tagline { margin-top: 28px; font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
 .hero-cta { border-top: 1px solid var(--line); background: var(--bg-raised); padding: 28px var(--gutter); }
 .hero-cta .note { margin-top: 14px; font-size: 14px; color: var(--ink-3); max-width: 420px; }
 .hero-art { padding: 16px; }
