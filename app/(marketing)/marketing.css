@@ -140,10 +140,6 @@ header {
 .section-head.center h2 { margin: 0 auto; }
 .section-head .lede { margin-top: 28px; font-size: 18px; color: var(--ink-2); max-width: 620px; }
 .section-head.center .lede { margin-left: auto; margin-right: auto; }
-.side-index {
-  position: absolute; top: 24px; left: 10px; writing-mode: vertical-rl; transform: rotate(180deg);
-  font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--line-strong);
-}
 
 .pillars { display: grid; grid-template-columns: repeat(3, 1fr); }
 .pillar { padding: 32px var(--gutter) 44px 28px; border-right: 1px solid var(--line); position: relative; }
@@ -276,7 +272,6 @@ footer { border-top: 1px solid var(--dark-line); }
   .answer { padding-left: calc(var(--gutter) + 44px); }
   .hero-cta .btn { width: 100%; }
   .banner .label { display: block; margin: 0 0 4px; }
-  .side-index { display: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .flow { stroke-dasharray: 4 6; animation: flow 1.6s linear infinite; }
@@ -301,7 +296,6 @@ footer { border-top: 1px solid var(--dark-line); }
 .block-head { padding: 88px var(--gutter); border-right: 1px solid var(--line); position: relative; }
 .block-head .chip { margin-bottom: 32px; }
 .block-head h2 { font-size: clamp(28px, 3.2vw, 38px); line-height: 1.12; }
-.block-head .side-index { top: 24px; }
 .block-body { padding: 88px var(--gutter) 88px 48px; max-width: 760px; }
 .prose p { color: var(--ink-2); font-size: 17px; }
 .prose p + p, .prose * + p, .prose p + * { margin-top: 16px; }
@@ -622,3 +616,11 @@ details[open]::details-content { block-size: auto; }
 .foot-links a { text-decoration: none; }
 .foot-links a:hover { color: #ece9e5; }
 .blog-post article a { text-decoration: underline; }
+
+/* Audience sections: "For x" reads as a small heading, underlined in the section's colour. */
+.aud.tone-blue { --aud-strong: #3b6fd8; }
+.aud.tone-violet { --aud-strong: #7b62d9; }
+.aud.tone-amber { --aud-strong: #b8862a; }
+.aud .chip { font-family: var(--sans); font-size: 26px; font-weight: 500; letter-spacing: -0.02em; text-transform: none; color: var(--ink); border: 0; border-bottom: 3px solid var(--aud-strong); border-radius: 0; padding: 0 0 6px; }
+.aud .chip i { display: none; }
+

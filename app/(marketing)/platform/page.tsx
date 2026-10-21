@@ -162,7 +162,6 @@ export default function Page() { return (<><SiteHeader current="platform" />
     <div className="rule" />
     <section className="frame" id="systems">
       <div className="section-head">
-        <span className="side-index">( 01 / 06 )</span>
         <span className="chip"><i />Architecture</span>
         <h2>Models decide. <span className="hl hl-blue">Agents manage.</span></h2>
         <p className="lede">Media buying happens at two very different speeds.</p>
@@ -267,7 +266,6 @@ export default function Page() { return (<><SiteHeader current="platform" />
     <div className="rule" />
     <section className="frame block" id="models">
       <div className="block-head">
-        <span className="side-index">( 02 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-blue)'}} />Models</span>
         <h2>Open models.</h2>
       </div>
@@ -335,7 +333,6 @@ export default function Page() { return (<><SiteHeader current="platform" />
     <div className="rule" />
     <section className="frame block" id="artf">
       <div className="block-head">
-        <span className="side-index">( 03 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-blue)'}} />ARTF</span>
         <h2>Built on ARTF.</h2>
       </div>
@@ -371,7 +368,6 @@ export default function Page() { return (<><SiteHeader current="platform" />
     <div className="band">
     <section className="frame block" id="agents">
       <div className="block-head">
-        <span className="side-index">( 04 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-violet)'}} />Agents</span>
         <h2>Always-on agents.</h2>
       </div>
@@ -446,7 +442,6 @@ export default function Page() { return (<><SiteHeader current="platform" />
     <div className="rule" />
     <section className="frame block" id="participants">
       <div className="block-head">
-        <span className="side-index">( 05 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-amber)'}} />Buyers + publishers</span>
         <h2>Buyers + publishers.</h2>
       </div>
@@ -515,7 +510,6 @@ export default function Page() { return (<><SiteHeader current="platform" />
     <div className="rule" />
     <section className="frame block" id="open">
       <div className="block-head">
-        <span className="side-index">( 06 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-green)'}} />Open</span>
         <h2>You own it.</h2>
       </div>

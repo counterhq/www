@@ -115,7 +115,6 @@ export default function Page() { return (<><SiteHeader />
     <div className="rule" />
     <section className="frame block aud tone-blue" id="advertisers">
       <div className="block-head">
-        <span className="side-index">( 01 / 06 )</span>
         <span className="chip"><i />For advertisers</span>
         <AudienceArt kind="advertiser" />
       </div>
@@ -127,7 +126,6 @@ export default function Page() { return (<><SiteHeader />
     <div className="rule" />
     <section className="frame block aud tone-violet" id="agencies">
       <div className="block-head">
-        <span className="side-index">( 02 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-violet)'}} />For agencies</span>
         <AudienceArt kind="agency" />
       </div>
@@ -139,7 +137,6 @@ export default function Page() { return (<><SiteHeader />
     <div className="rule" />
     <section className="frame block aud tone-amber" id="publishers">
       <div className="block-head">
-        <span className="side-index">( 03 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-amber)'}} />For publishers</span>
         <AudienceArt kind="publisher" />
       </div>
@@ -151,7 +148,6 @@ export default function Page() { return (<><SiteHeader />
     <div className="rule" />
     <section className="frame block" id="how">
       <div className="block-head">
-        <span className="side-index">( 04 / 06 )</span>
         <span className="chip"><i />How it works</span>
         <h2>Start with one <span className="hl hl-blue">buying problem</span></h2>
       </div>
@@ -164,7 +160,6 @@ export default function Page() { return (<><SiteHeader />
     <div className="rule" />
     <section className="frame" id="open">
       <div className="section-head center">
-        <span className="side-index">( 05 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-green)'}} />Open</span>
         <h2>Open <span className="hl hl-violet">by design.</span></h2>
         <p className="lede">The technology underneath Counter should not become another black box.</p>
@@ -188,7 +183,6 @@ export default function Page() { return (<><SiteHeader />
     <div className="rule" />
     <section className="frame faq-wrap" id="faq">
       <div className="faq-side">
-        <span className="side-index">( 06 / 06 )</span>
         <span className="chip"><i style={{background: 'var(--hl-amber)'}} />FAQ</span>
         <h2>Questions <span className="hl hl-amber">before you join</span></h2>
       </div>
