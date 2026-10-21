@@ -1,4 +1,12 @@
-export function SiteHeader({ current }: { current?: 'platform' | 'blog' }) { return (<header>
+import { MobileMenu } from '@/components/mobile-menu';
+type Current = 'platform' | 'blog';
+function NavLinks({ current }: { current?: Current }) { return (<>
+  <a href="/platform/" aria-current={current === 'platform' ? 'page' : undefined}>Platform</a>
+  <a href="/blog/" aria-current={current === 'blog' ? 'page' : undefined}>Blog</a>
+  <a href="/docs/">Docs<svg className="ext" width={10} height={10} viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true"><path d="M3 1.5h5.5V7M8.5 1.5 1.5 8.5" /></svg></a>
+  <a href="/#faq">FAQ</a>
+</>); }
+export function SiteHeader({ current }: { current?: Current }) { return (<header>
   <div className="frame nav">
     <a className="brand" href="/" aria-label="Counter home">
       <svg width={26} height={26} viewBox="0 0 26 26" aria-hidden="true">
@@ -7,12 +15,13 @@ export function SiteHeader({ current }: { current?: 'platform' | 'blog' }) { ret
       </svg>
       counter
     </a>
-    <nav className="nav-links" aria-label="Primary">
-      <a href="/platform/" aria-current={current === 'platform' ? 'page' : undefined}>Platform</a>
-      <a href="/blog/" aria-current={current === 'blog' ? 'page' : undefined}>Blog</a>
-      <a href="/docs/">Docs<svg className="ext" width={10} height={10} viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true"><path d="M3 1.5h5.5V7M8.5 1.5 1.5 8.5" /></svg></a>
-      <a href="/#faq">FAQ</a>
-    </nav>
-    <a className="btn" href="/#waitlist">Join the waitlist</a>
+    <nav className="nav-links" aria-label="Primary"><NavLinks current={current} /></nav>
+    <div className="nav-actions">
+      <a className="btn" href="/#waitlist">Join the waitlist</a>
+      <MobileMenu>
+        <NavLinks current={current} />
+        <a className="btn btn-solid" href="/#waitlist">Join the waitlist</a>
+      </MobileMenu>
+    </div>
   </div>
 </header>); }

@@ -627,3 +627,36 @@ details[open]::details-content { block-size: auto; }
 .aud .chip { font-family: var(--sans); font-size: 26px; font-weight: 500; letter-spacing: -0.02em; text-transform: none; color: var(--ink); border: 0; border-bottom: 3px solid var(--aud-strong); border-radius: 0; padding: 0 0 6px; }
 .aud .chip i { display: none; }
 
+
+/* Mobile menu: a full-height panel under the header, toggled by components/mobile-menu.tsx. */
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.nav-menu-toggle, .nav-menu-panel { display: none; }
+.nav-menu-toggle { flex: none; place-content: center; gap: 5px; width: 36px; height: 36px; padding: 0; background: transparent; border: 1px solid var(--ink); border-radius: 4px; cursor: pointer; }
+.nav-menu-toggle span { display: block; width: 14px; height: 1.5px; background: var(--ink); transition: transform .3s cubic-bezier(.2, .7, .2, 1); }
+.nav-menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.25px) rotate(45deg); }
+.nav-menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-3.25px) rotate(-45deg); }
+.nav-menu-panel {
+  position: absolute; left: 0; right: 0; top: 100%; height: calc(100dvh - 61px); overflow-y: auto;
+  flex-direction: column; padding: 24px var(--gutter); background: var(--bg);
+  opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s linear .3s;
+}
+.nav-menu-panel[data-open] { opacity: 1; visibility: visible; transition: opacity .3s ease; }
+.nav-menu-panel > * { transform: translateY(-8px); opacity: 0; transition: transform .4s cubic-bezier(.2, .7, .2, 1), opacity .3s ease; }
+.nav-menu-panel[data-open] > * { transform: none; opacity: 1; }
+.nav-menu-panel[data-open] > :nth-child(2) { transition-delay: .04s; }
+.nav-menu-panel[data-open] > :nth-child(3) { transition-delay: .08s; }
+.nav-menu-panel[data-open] > :nth-child(4) { transition-delay: .12s; }
+.nav-menu-panel[data-open] > :nth-child(5) { transition-delay: .16s; }
+.nav-menu-panel a:not(.btn) { display: block; padding: 16px 0; text-decoration: none; font-size: 32px; letter-spacing: -0.02em; color: var(--ink); border-bottom: 1px solid var(--line); }
+.nav-menu-panel .ext { width: 14px; height: 14px; margin-left: 8px; vertical-align: 4px; }
+.nav-menu-panel .btn { margin-top: 20px; width: 100%; }
+@media (max-width: 960px) {
+  .nav-menu-toggle { display: grid; }
+  .nav-menu-panel { display: flex; }
+}
+@media (max-width: 380px) {
+  .nav-actions > .btn { padding: 0 10px; font-size: 11px; letter-spacing: 0.04em; white-space: nowrap; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-menu-panel > * { transform: none; }
+}
